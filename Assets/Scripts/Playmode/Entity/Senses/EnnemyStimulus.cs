@@ -9,6 +9,7 @@ namespace Playmode.Entity.Senses
 
         private void Awake()
         {
+            
             InitializeComponent();
         }
 

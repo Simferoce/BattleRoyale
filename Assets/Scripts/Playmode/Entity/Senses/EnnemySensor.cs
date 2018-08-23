@@ -41,12 +41,12 @@ namespace Playmode.Entity.Senses
 
         private void NotifyEnnemySeen(EnnemyController ennemy)
         {
-            if (OnEnnemySeen != null) OnEnnemySeen(ennemy);
+            OnEnnemySeen?.Invoke(ennemy);
         }
 
         private void NotifyEnnemySightLost(EnnemyController ennemy)
         {
-            if (OnEnnemySightLost != null) OnEnnemySightLost(ennemy);
+            OnEnnemySightLost?.Invoke(ennemy);
         }
     }
 }

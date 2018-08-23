@@ -30,5 +30,13 @@ namespace Playmode.Movement
                 (direction < 0 ? rotateSpeed : -rotateSpeed) * Time.deltaTime
             );
         }
+
+        public override void MoveToward(Vector2 destination)
+        {
+        }
+
+        public override void Follow(Vector2 target, float distance)
+        {
+        }
     }
 }

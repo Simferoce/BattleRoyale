@@ -25,6 +25,7 @@ namespace Playmode.Ennemy
         private Mover mover;
         private Destroyer destroyer;
         private EnnemySensor ennemySensor;
+        private PickableSensor pickableSensor;
         private HitSensor hitSensor;
         private HandController handController;
 
@@ -67,6 +68,7 @@ namespace Playmode.Ennemy
 
             var rootTransform = transform.root;
             ennemySensor = rootTransform.GetComponentInChildren<EnnemySensor>();
+            pickableSensor = rootTransform.GetComponentInChildren<PickableSensor>();
             hitSensor = rootTransform.GetComponentInChildren<HitSensor>();
             handController = hand.GetComponent<HandController>();
 
@@ -86,6 +88,8 @@ namespace Playmode.Ennemy
         {
             ennemySensor.OnEnnemySeen += OnEnnemySeen;
             ennemySensor.OnEnnemySightLost += OnEnnemySightLost;
+            pickableSensor.OnPickableSeen += OnPickableSeen;
+            pickableSensor.OnPickableSightLost += OnPickableSightLost;
             hitSensor.OnHit += OnHit;
             health.OnDeath += OnDeath;
         }
@@ -99,6 +103,8 @@ namespace Playmode.Ennemy
         {
             ennemySensor.OnEnnemySeen -= OnEnnemySeen;
             ennemySensor.OnEnnemySightLost -= OnEnnemySightLost;
+            pickableSensor.OnPickableSeen -= OnPickableSeen;
+            pickableSensor.OnPickableSightLost -= OnPickableSightLost;
             hitSensor.OnHit -= OnHit;
             health.OnDeath -= OnDeath;
         }
@@ -147,6 +153,16 @@ namespace Playmode.Ennemy
         private void OnEnnemySightLost(EnnemyController ennemy)
         {
             Debug.Log("I've lost sight of an ennemy...Yikes!!!");
+        }
+
+        private void OnPickableSeen(Pickable.PickableInfo pickable)
+        {
+            Debug.Log("Hummm pickable spotted");
+        }
+
+        private void OnPickableSightLost(Pickable.PickableInfo pickable)
+        {
+            Debug.Log("Where it the pickable went ?");
         }
     }
 }

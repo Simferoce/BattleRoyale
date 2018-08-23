@@ -27,5 +27,15 @@ namespace Playmode.Movement
         public abstract void Move(Vector3 direction);
 
         public abstract void Rotate(float direction);
+
+        public virtual void MoveToward(Vector2 destination)
+        {
+
+        }
+
+        public virtual void Follow(Vector2 target, float distance)
+        {
+
+        }
     }
 }
