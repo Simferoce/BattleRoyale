@@ -31,12 +31,30 @@ namespace Playmode.Movement
             );
         }
 
-        public override void MoveToward(Vector2 destination)
+        public override void MoveToward(Vector3 destination)
         {
+            SetRotationToLookAt(destination);
+
+           Move(new Vector3(0, speed * Time.deltaTime,0));
         }
 
-        public override void Follow(Vector2 target, float distance)
+        public override void Follow(Vector3 target, float distance)
         {
+            float distanceWithTarget = Vector2.Distance((Vector2)target, (Vector2)rootTransform.transform.position);
+            if(distanceWithTarget >= distance)
+            {
+                MoveToward(target);
+            } else
+            {
+                SetRotationToLookAt(target);
+            }
+        }
+
+        public override void SetRotationToLookAt(Vector3 position)
+        {
+            Vector3 dir = position - rootTransform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            rootTransform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
     }
 }

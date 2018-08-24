@@ -26,7 +26,6 @@ namespace Playmode.Ennemy
         private Destroyer destroyer;
         private EnnemySensor ennemySensor;
         private PickableSensor pickableSensor;
-        private WallSensor wallSensor;
         private HitSensor hitSensor;
         private HandController handController;
 
@@ -70,11 +69,10 @@ namespace Playmode.Ennemy
             var rootTransform = transform.root;
             ennemySensor = rootTransform.GetComponentInChildren<EnnemySensor>();
             pickableSensor = rootTransform.GetComponentInChildren<PickableSensor>();
-            wallSensor = rootTransform.GetComponentInChildren<WallSensor>();
             hitSensor = rootTransform.GetComponentInChildren<HitSensor>();
             handController = hand.GetComponent<HandController>();
 
-            strategy = new TurnAndShootStragegy(mover, handController);
+            Configure(EnnemyStrategy.Normal, Color.black);
         }
 
         private void CreateStartingWeapon()
@@ -92,8 +90,6 @@ namespace Playmode.Ennemy
             ennemySensor.OnEnnemySightLost += OnEnnemySightLost;
             pickableSensor.OnPickableSeen += OnPickableSeen;
             pickableSensor.OnPickableSightLost += OnPickableSightLost;
-            wallSensor.OnWallSeen += OnWallSeen;
-            wallSensor.OnWallSightLost += OnWallSightLost;
             hitSensor.OnHit += OnHit;
             health.OnDeath += OnDeath;
         }
@@ -109,8 +105,6 @@ namespace Playmode.Ennemy
             ennemySensor.OnEnnemySightLost -= OnEnnemySightLost;
             pickableSensor.OnPickableSeen -= OnPickableSeen;
             pickableSensor.OnPickableSightLost -= OnPickableSightLost;
-            wallSensor.OnWallSeen -= OnWallSeen;
-            wallSensor.OnWallSightLost -= OnWallSightLost;
             hitSensor.OnHit -= OnHit;
             health.OnDeath -= OnDeath;
         }
@@ -124,15 +118,19 @@ namespace Playmode.Ennemy
             {
                 case EnnemyStrategy.Careful:
                     typeSign.GetComponent<SpriteRenderer>().sprite = carefulSprite;
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
                 case EnnemyStrategy.Cowboy:
                     typeSign.GetComponent<SpriteRenderer>().sprite = cowboySprite;
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
                 case EnnemyStrategy.Camper:
                     typeSign.GetComponent<SpriteRenderer>().sprite = camperSprite;
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
                 default:
                     typeSign.GetComponent<SpriteRenderer>().sprite = normalSprite;
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
             }
         }
@@ -169,16 +167,6 @@ namespace Playmode.Ennemy
         private void OnPickableSightLost(Playmode.Pickable.PickableController pickable)
         {
             //Debug.Log("Where it the pickable went ?");
-        }
-
-        private void OnWallSeen(Environement.WallController wall)
-        {
-            Debug.Log("I see the " + wall.wallType + " wall.");
-        }
-
-        private void OnWallSightLost(Environement.WallController wall)
-        {
-            Debug.Log("Lost sight of the " + wall.wallType + " wall.");
         }
     }
 }

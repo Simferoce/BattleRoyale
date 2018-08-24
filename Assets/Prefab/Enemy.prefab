@@ -56,8 +56,8 @@ GameObject:
   - component: {fileID: 212022067182938298}
   - component: {fileID: 60192341613569478}
   - component: {fileID: 114574195830500936}
-  - component: {fileID: 114973250039715782}
-  - component: {fileID: 114633119024748134}
+  - component: {fileID: 114521022963400826}
+  - component: {fileID: 114817771996937520}
   m_Layer: 0
   m_Name: Sight
   m_TagString: Untagged
@@ -335,6 +335,17 @@ MonoBehaviour:
   camperSprite: {fileID: 21300000, guid: 040104bd0166bd249a913acb61cce9b3, type: 3}
   startingWeaponPrefab: {fileID: 1627777849954234, guid: 88870865f059b0541aa68eb83ffb79d2,
     type: 2}
+--- !u!114 &114521022963400826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1699645007186046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe23ad87bc03724ead6c9cffd7738d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114528511461670924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -355,17 +366,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d650ce41c0d4151a1d594c24c2bc7e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114633119024748134
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1699645007186046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce9feac326f98144b8495d87aa67805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114771647671017566
@@ -393,6 +393,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: "Ce RigidBody2D est n\xE9cessaire pour que les \r\ntriggers se d\xE9clanchent
     m\xEAme s'ils sont en\r\nmouvement."
+--- !u!114 &114817771996937520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1699645007186046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bba5c8bbf0cdc489100b4f4a5194a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114842752972343190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -402,17 +413,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 558ee3f855554354b94d249ae40f8ba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114973250039715782
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1699645007186046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c4dfa090f9669146b5b88957a6b001b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212022067182938298
