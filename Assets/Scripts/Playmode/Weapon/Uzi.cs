@@ -4,16 +4,18 @@ namespace Playmode.Weapon
 {
     public class Uzi:Weapon
     {
-        public override void Shoot(Vector3 position, Quaternion rotation)
+        public override void Shoot(Vector3 position, Quaternion rotation, GameObject bullet)
         {
         }
 
         public override float GetFireDelayInSeconds()
         {
+            return 0.0f;
         }
 
         public override int GetDamageWeapon()
         {
+            return 0;
         }
     }
 }
