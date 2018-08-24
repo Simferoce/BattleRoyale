@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 60192341613569478}
   - component: {fileID: 114574195830500936}
   - component: {fileID: 114973250039715782}
+  - component: {fileID: 114633119024748134}
   m_Layer: 0
   m_Name: Sight
   m_TagString: Untagged
@@ -354,6 +355,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d650ce41c0d4151a1d594c24c2bc7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114633119024748134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1699645007186046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce9feac326f98144b8495d87aa67805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114771647671017566

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pickable
+namespace Playmode.Pickable
 {
     public enum PickableEnum
     {
@@ -11,10 +11,10 @@ namespace Pickable
         Shotgun,
         Length
     }
-
-    public class PickableInfo : MonoBehaviour {
-
+    public class PickableController : MonoBehaviour
+    {
+        [SerializeField] private PickableEnum pickable;
         public PickableEnum TypePickable { set; get; }
-
     }
 }
+

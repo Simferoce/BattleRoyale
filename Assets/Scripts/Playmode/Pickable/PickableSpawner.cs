@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Playmode.Entity.Senses;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pickable
+namespace Playmode.Pickable
 {
-
-
-
     public class PickableSpawner : MonoBehaviour
     {
 
@@ -41,7 +39,7 @@ namespace Pickable
                 GameObject gameObject = Instantiate(pickablePrefab, spawners[i]);
 
                 gameObject.GetComponent<SpriteRenderer>().sprite = pickables[randomPickable];
-                gameObject.GetComponent<PickableInfo>().TypePickable = (PickableEnum)randomPickable;
+                gameObject.GetComponentInChildren<PickableController>().TypePickable = (PickableEnum)randomPickable;
             }
         }
     }

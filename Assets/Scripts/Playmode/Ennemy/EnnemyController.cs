@@ -26,6 +26,7 @@ namespace Playmode.Ennemy
         private Destroyer destroyer;
         private EnnemySensor ennemySensor;
         private PickableSensor pickableSensor;
+        private WallSensor wallSensor;
         private HitSensor hitSensor;
         private HandController handController;
 
@@ -69,6 +70,7 @@ namespace Playmode.Ennemy
             var rootTransform = transform.root;
             ennemySensor = rootTransform.GetComponentInChildren<EnnemySensor>();
             pickableSensor = rootTransform.GetComponentInChildren<PickableSensor>();
+            wallSensor = rootTransform.GetComponentInChildren<WallSensor>();
             hitSensor = rootTransform.GetComponentInChildren<HitSensor>();
             handController = hand.GetComponent<HandController>();
 
@@ -90,6 +92,8 @@ namespace Playmode.Ennemy
             ennemySensor.OnEnnemySightLost += OnEnnemySightLost;
             pickableSensor.OnPickableSeen += OnPickableSeen;
             pickableSensor.OnPickableSightLost += OnPickableSightLost;
+            wallSensor.OnWallSeen += OnWallSeen;
+            wallSensor.OnWallSightLost += OnWallSightLost;
             hitSensor.OnHit += OnHit;
             health.OnDeath += OnDeath;
         }
@@ -105,6 +109,8 @@ namespace Playmode.Ennemy
             ennemySensor.OnEnnemySightLost -= OnEnnemySightLost;
             pickableSensor.OnPickableSeen -= OnPickableSeen;
             pickableSensor.OnPickableSightLost -= OnPickableSightLost;
+            wallSensor.OnWallSeen -= OnWallSeen;
+            wallSensor.OnWallSightLost -= OnWallSightLost;
             hitSensor.OnHit -= OnHit;
             health.OnDeath -= OnDeath;
         }
@@ -133,36 +139,46 @@ namespace Playmode.Ennemy
 
         private void OnHit(int hitPoints)
         {
-            Debug.Log("OW, I'm hurt! I'm really much hurt!!!");
+            //Debug.Log("OW, I'm hurt! I'm really much hurt!!!");
 
             health.Hit(hitPoints);
         }
 
         private void OnDeath()
         {
-            Debug.Log("Yaaaaarggg....!! I died....GG.");
+            //Debug.Log("Yaaaaarggg....!! I died....GG.");
 
             destroyer.Destroy();
         }
 
         private void OnEnnemySeen(EnnemyController ennemy)
         {
-            Debug.Log("I've seen an ennemy!! Ya so dead noob!!!");
+            //Debug.Log("I've seen an ennemy!! Ya so dead noob!!!");
         }
 
         private void OnEnnemySightLost(EnnemyController ennemy)
         {
-            Debug.Log("I've lost sight of an ennemy...Yikes!!!");
+            //Debug.Log("I've lost sight of an ennemy...Yikes!!!");
         }
 
-        private void OnPickableSeen(Pickable.PickableInfo pickable)
+        private void OnPickableSeen(Playmode.Pickable.PickableController pickable)
         {
-            Debug.Log("Hummm pickable spotted");
+            //Debug.Log("Hummm pickable spotted");
         }
 
-        private void OnPickableSightLost(Pickable.PickableInfo pickable)
+        private void OnPickableSightLost(Playmode.Pickable.PickableController pickable)
         {
-            Debug.Log("Where it the pickable went ?");
+            //Debug.Log("Where it the pickable went ?");
+        }
+
+        private void OnWallSeen(Environement.WallController wall)
+        {
+            Debug.Log("I see the " + wall.wallType + " wall.");
+        }
+
+        private void OnWallSightLost(Environement.WallController wall)
+        {
+            Debug.Log("Lost sight of the " + wall.wallType + " wall.");
         }
     }
 }
