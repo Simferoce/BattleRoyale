@@ -18,7 +18,7 @@ namespace Pickable
 
         private void Awake()
         {
-            spawners = new Transform[transform.GetChildCount()];
+            spawners = new Transform[transform.childCount];
             for (int i = 0; i < spawners.Length; ++i)
             {
                 spawners[i] = transform.GetChild(i);

@@ -1,21 +1,13 @@
-﻿using UnityEngine;
+﻿using Boo.Lang.Environments;
+using UnityEngine;
 
 namespace Playmode.Weapon
 {
-    public class Uzi:Weapon
+    public class Uzi : WeaponController
     {
-        public override void Shoot(Vector3 position, Quaternion rotation, GameObject bullet)
+        public override void Shoot()
         {
-        }
-
-        public override float GetFireDelayInSeconds()
-        {
-            return 0.0f;
-        }
-
-        public override int GetDamageWeapon()
-        {
-            return 0;
+            base.Shoot();
         }
     }
 }

@@ -2,22 +2,20 @@
 
 namespace Playmode.Weapon
 {
-    public class Shotgun:Weapon
+    public class Shotgun:WeaponController
     {
-        public override void Shoot(Vector3 position, Quaternion rotation, GameObject bullet)
-        {
-        }
-
-        public override float GetFireDelayInSeconds()
-        {
-            return 0.0f;
-        }
-
-        public override int GetDamageWeapon()
-        {
-            return 0;
-        }
+        static float angle=60;
+        static float nbBullets = 5;
+        readonly float angleEntreBalles = angle / (nbBullets - 1); 
         
-        
+        public override void Shoot()
+        {            
+            Debug.Log("test");
+            for (int i = 0; i < nbBullets; ++i)
+            {
+                GameObject bullet= Instantiate(bulletPrefab, transform.position, transform.rotation);
+                bullet.transform.Rotate(new Vector3(0,0,angleEntreBalles*i-(angle/2)));
+            }           
+        }
     }
 }

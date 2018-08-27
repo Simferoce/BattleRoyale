@@ -5,9 +5,9 @@ namespace Playmode.Weapon
 {
     public class WeaponController : MonoBehaviour
     {
-        [Header("Behaviour")] [SerializeField] private GameObject bulletPrefab;
+        [Header("Behaviour")] [SerializeField] protected GameObject bulletPrefab;
         [SerializeField] private float fireDelayInSeconds = 1f;
-
+        
         private float lastTimeShotInSeconds;
 
         private bool CanShoot => Time.time - lastTimeShotInSeconds > fireDelayInSeconds;
@@ -29,14 +29,13 @@ namespace Playmode.Weapon
             lastTimeShotInSeconds = 0;
         }
 
-        public void Shoot()
-        {
+        public virtual void Shoot()
+        {           
             if (CanShoot)
             {
                 Instantiate(bulletPrefab, transform.position, transform.rotation);
-
                 lastTimeShotInSeconds = Time.time;
-            }
+            }          
         }
     }
 }

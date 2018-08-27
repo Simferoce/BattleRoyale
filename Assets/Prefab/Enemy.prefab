@@ -332,7 +332,7 @@ MonoBehaviour:
   carefulSprite: {fileID: 21300000, guid: 59cbaa9177c078b44b276b554d1b1b8c, type: 3}
   cowboySprite: {fileID: 21300000, guid: da442e3b6c1ce4f4487a3c003f766013, type: 3}
   camperSprite: {fileID: 21300000, guid: 040104bd0166bd249a913acb61cce9b3, type: 3}
-  startingWeaponPrefab: {fileID: 1627777849954234, guid: 88870865f059b0541aa68eb83ffb79d2,
+  startingWeaponPrefab: {fileID: 1702443075099818, guid: 4ef7456b25ca43c498a087a79e2895f4,
     type: 2}
 --- !u!114 &114528511461670924
 MonoBehaviour:
