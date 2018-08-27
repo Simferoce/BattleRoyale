@@ -19,7 +19,7 @@ namespace Playmode.Pickable
 
         private void EnemySensor_OnEnnemySeen(Ennemy.EnnemyController ennemy)
         {
-            ennemy.Take(hold);
+            ennemy.Take(Instantiate(hold));
             Destroy(this.gameObject);
         }
     }

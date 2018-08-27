@@ -24,6 +24,14 @@ namespace Playmode.Ennemy.BodyParts
         {
             if (gameObject != null)
             {
+                gameObject.transform.parent = transform;
+                gameObject.transform.localPosition = Vector3.zero;
+                gameObject.transform.localRotation = Quaternion.identity;
+
+                if(weapon != null)
+                {
+                    Destroy(weapon.transform.parent.gameObject);
+                }
                 weapon = gameObject.GetComponentInChildren<WeaponController>();
             }
             else
@@ -32,15 +40,8 @@ namespace Playmode.Ennemy.BodyParts
             }
         }
 
-        public void AimTowards(GameObject target)
-        {
-            //TODO : Utilisez ce que vous savez des vecteurs pour implémenter cette méthode
-            throw new NotImplementedException();
-        }
-
         public void Use()
         {
-
             if (weapon != null)
             {               
                 weapon.Shoot();                  

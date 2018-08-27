@@ -35,6 +35,7 @@ namespace Playmode.Ennemy.Strategies
             if(target != null)
             {
                 mover.Follow((Vector3)target, 5f);
+                handController.Use();
                 
             } else
             {
@@ -43,6 +44,7 @@ namespace Playmode.Ennemy.Strategies
                 else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
                     Search();
                 mover.Follow((Vector2)randomSearch, safeDistance);
+                handController.Use();
             }
         }
 
