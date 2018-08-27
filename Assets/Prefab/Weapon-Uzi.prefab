@@ -94,4 +94,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1498593765341340, guid: 93e0a956224a4bd4eb44dcdcd5cfb846,
     type: 2}
-  fireDelayInSeconds: 0.25
+  fireDelayInSeconds: 0.1
