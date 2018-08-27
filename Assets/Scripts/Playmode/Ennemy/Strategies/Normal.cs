@@ -4,6 +4,7 @@ using System.Linq;
 using Playmode.Ennemy.BodyParts;
 using Playmode.Entity.Senses;
 using Playmode.Movement;
+using Playmode.Util.Values;
 using UnityEngine;
 
 namespace Playmode.Ennemy.Strategies
@@ -16,8 +17,6 @@ namespace Playmode.Ennemy.Strategies
         private Vector2? randomSearch = null;
         private float sensibilityProximity = 0.5f;
         private float safeDistance = 5.0f;
-        private float height => 2f * Camera.main.orthographicSize;
-        private float width => height * Camera.main.aspect;
 
 
         public Normal(Mover mover, HandController handController, EnnemySensor enemySensor)
@@ -57,8 +56,8 @@ namespace Playmode.Ennemy.Strategies
 
         private void Search()
         {
-            randomSearch = new Vector2(UnityEngine.Random.Range(-width / 2, width/2),
-                UnityEngine.Random.Range(-height / 2, height/2));
+            randomSearch = new Vector2(UnityEngine.Random.Range(-CameraInfo.Width / 2, CameraInfo.Width / 2),
+                UnityEngine.Random.Range(-CameraInfo.Height / 2, CameraInfo.Height / 2));
         }
     }
 }

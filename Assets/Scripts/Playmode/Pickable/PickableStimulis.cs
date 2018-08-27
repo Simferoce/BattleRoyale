@@ -1,14 +1,14 @@
-﻿using System.Collections;
+﻿using Playmode.Weapon;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Playmode.Pickable;
 
 namespace Playmode.Entity.Senses
 {
 
     public class PickableStimulis : MonoBehaviour
     {
-        private PickableController controller;
+        private Pickable.PickableController controller;
 
         private void Awake()
         {
@@ -17,7 +17,7 @@ namespace Playmode.Entity.Senses
 
         private void InitializeComponent()
         {
-            controller = GetComponentInChildren<PickableController>();
+            controller = GetComponentInChildren<Pickable.PickableController>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
