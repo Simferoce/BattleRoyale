@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Playmode.Ennemy;
+using Playmode.Entity.Status;
 using UnityEngine;
 
 namespace Playmode.Entity.Senses

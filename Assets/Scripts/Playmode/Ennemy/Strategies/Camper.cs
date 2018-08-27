@@ -71,7 +71,7 @@ namespace Playmode.Ennemy.Strategies
                 return null;
         }
 
-        private Vector3? TargetMedkit()
+        /*private Vector3? TargetMedkit()
         {
             if (pickableSensor.PickablesInSight.Count() > 0)
                 return pickableSensor.PickablesInSight.First().transform.position;
@@ -86,7 +86,7 @@ namespace Playmode.Ennemy.Strategies
             else
                 return null;
         }
-        
+        */
         private void Search()
         {
             randomSearch = new Vector2(UnityEngine.Random.Range(-width / 2, width/2),

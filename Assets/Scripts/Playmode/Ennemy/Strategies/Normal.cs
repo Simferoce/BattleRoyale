@@ -36,7 +36,7 @@ namespace Playmode.Ennemy.Strategies
 
             if(target != null)
             {
-                mover.Follow((Vector3)target, 5f);
+                mover.MoveToward((Vector2)target);
                 handController.Use();
                 
             } else
@@ -45,7 +45,7 @@ namespace Playmode.Ennemy.Strategies
                     Search();
                 else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
                     Search();
-                mover.Follow((Vector2)randomSearch, safeDistance);
+                mover.MoveToward((Vector2)target);
                 handController.Use();
             }
         }
@@ -58,7 +58,7 @@ namespace Playmode.Ennemy.Strategies
                 return null;
         }
 
-        private Vector3? TargetMedkit()
+        /*private Vector3? TargetMedkit()
         {
             if (pickableSensor.PickablesInSight.Count() > 0)
                 return pickableSensor.PickablesInSight.First().transform.position;
@@ -73,7 +73,7 @@ namespace Playmode.Ennemy.Strategies
             else
                 return null;
         }
-        
+        */
         private void Search()
         {
             randomSearch = new Vector2(UnityEngine.Random.Range(-CameraInfo.Width / 2, CameraInfo.Width / 2),

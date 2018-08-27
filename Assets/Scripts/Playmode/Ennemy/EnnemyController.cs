@@ -146,7 +146,7 @@ namespace Playmode.Ennemy
         {
             //Debug.Log("Yaaaaarggg....!! I died....GG.");
 
-            destroyer.Destroy();
+            //destroyer.Destroy();
         }
 
         private void OnEnnemySeen(EnnemyController ennemy)
@@ -172,6 +172,11 @@ namespace Playmode.Ennemy
         public void Take(GameObject gameObject)
         {
             handController.Hold(gameObject);
+        }
+
+        public void Heal(int healthPoints)
+        {
+            health.Heal(healthPoints);
         }
     }
 }

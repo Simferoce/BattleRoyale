@@ -199,6 +199,7 @@ MonoBehaviour:
   pickables:
   - {fileID: 1072535679243536, guid: 19e0ea007fd2d0b4e99e2089f8c31e87, type: 2}
   - {fileID: 1357872159379938, guid: a4f4a7ba46ea5fb448fa3837e591eb4d, type: 2}
+  - {fileID: 1594273403483344, guid: ef4a12d7f9f31e34bb4125156d0f27cb, type: 2}
   spawner: {fileID: 1261953868439324, guid: 0568e962356d6c741ad7cf0064c8f786, type: 2}
   numbOfSpawners: 1000
 --- !u!4 &707874997
@@ -453,7 +454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2073673046
 MonoBehaviour:
   m_ObjectHideFlags: 0

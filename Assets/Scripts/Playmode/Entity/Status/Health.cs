@@ -38,6 +38,12 @@ namespace Playmode.Entity.Status
             HealthPoints -= hitPoints;
         }
 
+        public void Heal(int healthPoints)
+        {
+            HealthPoints += healthPoints;
+            Debug.Log("Healed " + healthPoints + " hp.");
+        }
+
         private void NotifyDeath()
         {
             if (OnDeath != null) OnDeath();
