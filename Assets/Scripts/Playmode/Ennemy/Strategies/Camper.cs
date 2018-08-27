@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Playmode.Ennemy.Strategies
 {
-    class Normal : IEnnemyStrategy
+    public class Camper : IEnnemyStrategy
     {
         private readonly Mover mover;
         private readonly HandController handController;
@@ -22,7 +22,7 @@ namespace Playmode.Ennemy.Strategies
         private float width => height * Camera.main.aspect;
 
 
-        public Normal(Mover mover, HandController handController, EnnemySensor enemySensor)
+        public Camper(Mover mover, HandController handController, EnnemySensor enemySensor)
         {
             this.mover = mover;
             this.handController = handController;
@@ -33,12 +33,26 @@ namespace Playmode.Ennemy.Strategies
         public void Act()
         {
             Vector3? target;
-            target = TargetEnemy();
+            /*target = TargetMedkit();
 
             if(target != null)
             {
                 mover.Follow((Vector3)target, 5f);
                 
+            } else
+            {
+                if (randomSearch == null)
+                    Search();
+                else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
+                    Search();
+                mover.Follow((Vector2)randomSearch, safeDistance);
+            }*/
+
+            target = TargetEnemy();
+            if(target != null)
+            {
+                mover.Follow((Vector3)target, 5f); 
+                mover.SetRotationToLookAt((Vector2)randomSearch);
             } else
             {
                 if (randomSearch == null)
