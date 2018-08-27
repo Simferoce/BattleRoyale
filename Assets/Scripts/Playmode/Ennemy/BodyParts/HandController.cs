@@ -24,9 +24,6 @@ namespace Playmode.Ennemy.BodyParts
         {
             if (gameObject != null)
             {
-                gameObject.transform.parent = transform;
-                gameObject.transform.localPosition = Vector3.zero;
-                
                 weapon = gameObject.GetComponentInChildren<WeaponController>();
             }
             else

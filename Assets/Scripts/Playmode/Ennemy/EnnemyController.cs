@@ -159,14 +159,19 @@ namespace Playmode.Ennemy
             //Debug.Log("I've lost sight of an ennemy...Yikes!!!");
         }
 
-        private void OnPickableSeen(Playmode.Pickable.PickableController pickable)
+        private void OnPickableSeen(Pickable.PickableController pickable)
         {
             //Debug.Log("Hummm pickable spotted");
         }
 
-        private void OnPickableSightLost(Playmode.Pickable.PickableController pickable)
+        private void OnPickableSightLost(Pickable.PickableController pickable)
         {
-            //Debug.Log("Where it the pickable went ?");
+            //Debug.Log("Where the pickable went ?");
+        }
+
+        public void Take(GameObject gameObject)
+        {
+            handController.Hold(gameObject);
         }
     }
 }

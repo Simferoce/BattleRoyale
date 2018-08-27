@@ -7,6 +7,8 @@ TagManager:
   - MainController
   - Enemy
   - Pickable
+  - Sight
+  - Body
   layers:
   - Default
   - TransparentFX
