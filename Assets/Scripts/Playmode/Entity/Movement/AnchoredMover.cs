@@ -31,5 +31,20 @@ namespace Playmode.Movement
                 (direction < 0 ? rotateSpeed : -rotateSpeed) * Time.deltaTime
             );
         }
+
+        public override void MoveToward(Vector3 destination)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Follow(Vector3 target, float distance)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void SetRotationToLookAt(Vector3 position)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

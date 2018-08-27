@@ -72,7 +72,7 @@ namespace Playmode.Ennemy
             hitSensor = rootTransform.GetComponentInChildren<HitSensor>();
             handController = hand.GetComponent<HandController>();
 
-            strategy = new TurnAndShootStragegy(mover, handController);
+            Configure(EnnemyStrategy.Normal, Color.black);
         }
 
         private void CreateStartingWeapon()
@@ -118,51 +118,55 @@ namespace Playmode.Ennemy
             {
                 case EnnemyStrategy.Careful:
                     typeSign.GetComponent<SpriteRenderer>().sprite = carefulSprite;
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
                 case EnnemyStrategy.Cowboy:
                     typeSign.GetComponent<SpriteRenderer>().sprite = cowboySprite;
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
                 case EnnemyStrategy.Camper:
                     typeSign.GetComponent<SpriteRenderer>().sprite = camperSprite;
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
                 default:
                     typeSign.GetComponent<SpriteRenderer>().sprite = normalSprite;
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
             }
         }
 
         private void OnHit(int hitPoints)
         {
-            Debug.Log("OW, I'm hurt! I'm really much hurt!!!");
+            //Debug.Log("OW, I'm hurt! I'm really much hurt!!!");
 
             health.Hit(hitPoints);
         }
 
         private void OnDeath()
         {
-            Debug.Log("Yaaaaarggg....!! I died....GG.");
+            //Debug.Log("Yaaaaarggg....!! I died....GG.");
 
             destroyer.Destroy();
         }
 
         private void OnEnnemySeen(EnnemyController ennemy)
         {
-            Debug.Log("I've seen an ennemy!! Ya so dead noob!!!");
+            //Debug.Log("I've seen an ennemy!! Ya so dead noob!!!");
         }
 
         private void OnEnnemySightLost(EnnemyController ennemy)
         {
-            Debug.Log("I've lost sight of an ennemy...Yikes!!!");
+            //Debug.Log("I've lost sight of an ennemy...Yikes!!!");
         }
 
-        private void OnPickableSeen(Pickable.PickableInfo pickable)
+        private void OnPickableSeen(Playmode.Pickable.PickableController pickable)
         {
-            Debug.Log("Hummm pickable spotted");
+            //Debug.Log("Hummm pickable spotted");
         }
 
-        private void OnPickableSightLost(Pickable.PickableInfo pickable)
+        private void OnPickableSightLost(Playmode.Pickable.PickableController pickable)
         {
-            Debug.Log("Where it the pickable went ?");
+            //Debug.Log("Where it the pickable went ?");
         }
     }
 }
