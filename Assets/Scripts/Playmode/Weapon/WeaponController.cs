@@ -8,9 +8,9 @@ namespace Playmode.Weapon
         [Header("Behaviour")] [SerializeField] protected GameObject bulletPrefab;
         [SerializeField] private float fireDelayInSeconds = 1f;
         
-        private float lastTimeShotInSeconds;
+        protected float lastTimeShotInSeconds;
 
-        private bool CanShoot => Time.time - lastTimeShotInSeconds > fireDelayInSeconds;
+        protected bool CanShoot => Time.time - lastTimeShotInSeconds > fireDelayInSeconds;
 
         private void Awake()
         {
