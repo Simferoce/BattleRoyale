@@ -8,10 +8,7 @@ namespace Playmode.Pickable
 {
     public class PickableSpawner : MonoBehaviour
     {
-
-        [SerializeField] private GameObject pickablePrefab;
-        [Header("Type Images")]
-        [SerializeField] private Sprite[] pickables;
+        [SerializeField] private GameObject[] pickables;
         private Transform[] spawners;
 
         private void Awake()
@@ -25,21 +22,12 @@ namespace Playmode.Pickable
             SpawnPickable();
         }
 
-        private void ValidateSerialisedFields()
-        {
-            if (pickablePrefab == null)
-                throw new ArgumentException("Can't spawn null pickable prefab.");
-        }
-
         private void SpawnPickable()
         {
             for (int i = 0; i < spawners.Length; ++i)
             {
                 int randomPickable = UnityEngine.Random.Range(0, pickables.Length);
-                GameObject gameObject = Instantiate(pickablePrefab, spawners[i]);
-
-                gameObject.GetComponent<SpriteRenderer>().sprite = pickables[randomPickable];
-                gameObject.GetComponentInChildren<PickableController>().TypePickable = (PickableEnum)randomPickable;
+                GameObject gameObject = Instantiate(pickables[randomPickable], spawners[i]);
             }
         }
     }
