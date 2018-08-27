@@ -46,6 +46,8 @@ namespace Playmode.Movement
                 MoveToward(target);
             } else
             {
+                //careful
+                MoveToward(-1*target);
                 SetRotationToLookAt(target);
             }
         }

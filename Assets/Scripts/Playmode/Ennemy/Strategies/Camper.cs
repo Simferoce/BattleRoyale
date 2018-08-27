@@ -5,12 +5,11 @@ using Playmode.Ennemy.BodyParts;
 using Playmode.Entity.Senses;
 using Playmode.Movement;
 using Playmode.Pickable;
-using Playmode.Util.Values;
 using UnityEngine;
 
 namespace Playmode.Ennemy.Strategies
 {
-    class Normal : IEnnemyStrategy
+    public class Camper : IEnnemyStrategy
     {
         private readonly Mover mover;
         private readonly HandController handController;
@@ -19,9 +18,11 @@ namespace Playmode.Ennemy.Strategies
         private Vector2? randomSearch = null;
         private float sensibilityProximity = 0.5f;
         private float safeDistance = 5.0f;
+        private float height => 2f * Camera.main.orthographicSize;
+        private float width => height * Camera.main.aspect;
 
 
-        public Normal(Mover mover, HandController handController, EnnemySensor enemySensor)
+        public Camper(Mover mover, HandController handController, EnnemySensor enemySensor)
         {
             this.mover = mover;
             this.handController = handController;
@@ -32,12 +33,11 @@ namespace Playmode.Ennemy.Strategies
         public void Act()
         {
             Vector3? target;
-            target = TargetEnemy();
+            /*target = TargetMedkit();
 
             if(target != null)
             {
                 mover.Follow((Vector3)target, 5f);
-                handController.Use();
                 
             } else
             {
@@ -46,7 +46,20 @@ namespace Playmode.Ennemy.Strategies
                 else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
                     Search();
                 mover.Follow((Vector2)randomSearch, safeDistance);
-                handController.Use();
+            }*/
+
+            target = TargetEnemy();
+            if(target != null)
+            {
+                mover.Follow((Vector3)target, 5f); 
+                mover.SetRotationToLookAt((Vector2)randomSearch);
+            } else
+            {
+                if (randomSearch == null)
+                    Search();
+                else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
+                    Search();
+                mover.Follow((Vector2)randomSearch, safeDistance);
             }
         }
 
@@ -76,8 +89,8 @@ namespace Playmode.Ennemy.Strategies
         
         private void Search()
         {
-            randomSearch = new Vector2(UnityEngine.Random.Range(-CameraInfo.Width / 2, CameraInfo.Width / 2),
-                UnityEngine.Random.Range(-CameraInfo.Height / 2, CameraInfo.Height / 2));
+            randomSearch = new Vector2(UnityEngine.Random.Range(-width / 2, width/2),
+                UnityEngine.Random.Range(-height / 2, height/2));
         }
     }
 }
