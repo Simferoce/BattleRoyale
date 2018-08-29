@@ -22,7 +22,7 @@ namespace Assets.Scripts.Playmode.Entity.Senses
         public static PickableControllerMedKit TargetMedkit(PickableSensor pickableSensor)
         {
             if (pickableSensor.PickablesMedKitInSight.Count() > 0)
-                return pickableSensor.PickablesMedKitInSight.First()?.transform.position;
+                return pickableSensor.PickablesMedKitInSight.First();
             else
                 return null;
         }
