@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Playmode.Entity.Senses;
+using System;
 using UnityEngine;
 
 namespace Playmode.Weapon
 {
-    public class WeaponController : MonoBehaviour
+    public abstract class WeaponController : MonoBehaviour
     {
         [Header("Behaviour")] [SerializeField] protected GameObject bulletPrefab;
         [SerializeField] private float fireDelayInSeconds = 1f;
-        
+        protected int damageModifier = 0;
+
         protected float lastTimeShotInSeconds;
 
         protected bool CanShoot => Time.time - lastTimeShotInSeconds > fireDelayInSeconds;
@@ -33,9 +35,12 @@ namespace Playmode.Weapon
         {           
             if (CanShoot)
             {
-                Instantiate(bulletPrefab, transform.position, transform.rotation);
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                bullet.GetComponentInChildren<HitStimulus>().HitPoints += damageModifier;
                 lastTimeShotInSeconds = Time.time;
             }          
         }
+
+        public abstract void UpdatePower();
     }
 }
