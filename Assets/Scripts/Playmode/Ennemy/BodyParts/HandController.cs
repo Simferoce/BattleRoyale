@@ -20,23 +20,33 @@ namespace Playmode.Ennemy.BodyParts
             mover = GetComponent<AnchoredMover>();
         }
         
-        public void Hold(GameObject gameObject)
+        public void Hold(GameObject weaponObject)
         {
-            if (gameObject != null)
+            if (weaponObject != null)
             {
-                gameObject.transform.parent = transform;
-                gameObject.transform.localPosition = Vector3.zero;
-                gameObject.transform.localRotation = Quaternion.identity;
 
-                if(weapon != null)
+                WeaponController newWeapon = weaponObject.GetComponentInChildren<WeaponController>();
+                if (this.weapon != null && weapon.GetType().Equals(newWeapon.GetType()))
                 {
-                    Destroy(weapon.transform.parent.gameObject);
+                    this.weapon.UpdatePower();
                 }
-                weapon = gameObject.GetComponentInChildren<WeaponController>();
-            }
-            else
-            {
-                weapon = null;
+                else if(this.weapon != null)
+                {
+                    weaponObject.transform.parent = transform;
+                    weaponObject.transform.localPosition = Vector3.zero;
+                    weaponObject.transform.localRotation = Quaternion.identity;
+
+                    Destroy(weapon.transform.parent.gameObject);
+
+                    this.weapon = newWeapon;
+                }
+                else
+                {
+                    weaponObject.transform.parent = transform;
+                    weaponObject.transform.localPosition = Vector3.zero;
+                    weaponObject.transform.localRotation = Quaternion.identity;
+                    this.weapon = newWeapon;
+                }
             }
         }
 

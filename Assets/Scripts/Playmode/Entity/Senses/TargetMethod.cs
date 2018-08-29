@@ -14,14 +14,14 @@ namespace Assets.Scripts.Playmode.Entity.Senses
         public static Vector3? TargetEnemy(EnnemySensor enemySensor)
         {
             if (enemySensor.EnnemiesInSight.Count() > 0)
-                return enemySensor.EnnemiesInSight.First().transform.position;
+                return enemySensor.EnnemiesInSight.First()?.transform.position;
             else
                 return null;
         }
         public static Vector3? TargetMedkit(PickableSensor pickableSensor)
         {
             if (pickableSensor.PickablesMedKitInSight.Count() > 0)
-                return pickableSensor.PickablesMedKitInSight.First().transform.position;
+                return pickableSensor.PickablesMedKitInSight.First()?.transform.position;
             else
                 return null;
         }
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Playmode.Entity.Senses
         public static Vector3? TargetWeapon(PickableSensor pickableSensor)
         {
             if (pickableSensor.PickablesWeaponInSight.Count() > 0)
-                return pickableSensor.PickablesWeaponInSight.First().transform.position;
+                return pickableSensor.PickablesWeaponInSight.First()?.transform.position;
             else
                 return null;
         }
