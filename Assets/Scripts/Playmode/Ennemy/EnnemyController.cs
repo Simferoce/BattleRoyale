@@ -9,6 +9,8 @@ using UnityEngine;
 
 namespace Playmode.Ennemy
 {
+    public delegate void DeathEventHandler(EnnemyController ennemyController);
+
     public class EnnemyController : MonoBehaviour
     {
         [Header("Body Parts")] [SerializeField] private GameObject body;
@@ -30,6 +32,8 @@ namespace Playmode.Ennemy
         private HandController handController;
 
         private IEnnemyStrategy strategy;
+
+        public event DeathEventHandler OnDeathEnemy;
 
         private void Awake()
         {
@@ -145,8 +149,8 @@ namespace Playmode.Ennemy
         private void OnDeath()
         {
             //Debug.Log("Yaaaaarggg....!! I died....GG.");
-
-            //destroyer.Destroy();
+            NotifyOnEnemyDeath();
+            destroyer.Destroy();
         }
 
         private void OnEnnemySeen(EnnemyController ennemy)
@@ -177,6 +181,11 @@ namespace Playmode.Ennemy
         public void Heal(int healthPoints)
         {
             health.Heal(healthPoints);
+        }
+
+        private void NotifyOnEnemyDeath()
+        {
+            OnDeathEnemy?.Invoke(this);
         }
     }
 }

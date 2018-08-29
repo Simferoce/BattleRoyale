@@ -29,13 +29,20 @@ namespace Playmode.Entity.Senses
         public void See(EnnemyController ennemy)
         {
             ennemiesInSight.Add(ennemy);
+            ennemy.OnDeathEnemy += Ennemy_OnDeathEnemy;
 
             NotifyEnnemySeen(ennemy);
+        }
+
+        private void Ennemy_OnDeathEnemy(EnnemyController ennemyController)
+        {
+            ennemiesInSight.Remove(ennemyController);
         }
 
         public void LooseSightOf(EnnemyController ennemy)
         {
             ennemiesInSight.Remove(ennemy);
+            ennemy.OnDeathEnemy -= Ennemy_OnDeathEnemy;
 
             NotifyEnnemySightLost(ennemy);
         }

@@ -38,15 +38,13 @@ namespace Playmode.Ennemy.Strategies
             {
                 mover.MoveToward((Vector2)target);
                 handController.Use();
-                
             } else
             {
                 if (randomSearch == null)
                     Search();
                 else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
                     Search();
-                mover.MoveToward((Vector2)target);
-                handController.Use();
+                mover.MoveToward((Vector2)randomSearch);
             }
         }
 
