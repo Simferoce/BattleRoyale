@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Playmode.Pickable;
 using UnityEngine;
 
 namespace Assets.Scripts.Playmode.Entity.Senses
@@ -18,10 +19,10 @@ namespace Assets.Scripts.Playmode.Entity.Senses
             else
                 return null;
         }
-        public static Vector3? TargetMedkit(PickableSensor pickableSensor)
+        public static PickableControllerMedKit TargetMedkit(PickableSensor pickableSensor)
         {
             if (pickableSensor.PickablesMedKitInSight.Count() > 0)
-                return pickableSensor.PickablesMedKitInSight.First().transform.position;
+                return pickableSensor.PickablesMedKitInSight.First();
             else
                 return null;
         }
