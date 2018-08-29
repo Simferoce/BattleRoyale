@@ -9,18 +9,14 @@ namespace Playmode.Pickable
     {
         [SerializeField] GameObject hold;
 
-        private EnnemySensor enemySensor;
-
-        private void Awake()
+        public PickableControllerWeapon()
         {
-            enemySensor = GetComponent<EnnemySensor>();
-            enemySensor.OnEnnemySeen += EnemySensor_OnEnnemySeen;
+            this.pickUpFunction = PickUpFunction;
         }
 
-        private void EnemySensor_OnEnnemySeen(Ennemy.EnnemyController ennemy)
+        public void PickUpFunction(Ennemy.EnnemyController ennemy)
         {
             ennemy.Take(Instantiate(hold));
-            Destroy(this.gameObject);
         }
     }
 }

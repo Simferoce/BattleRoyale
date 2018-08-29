@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Playmode.Entity.Senses;
 using Playmode.Ennemy.BodyParts;
 using Playmode.Entity.Senses;
 using Playmode.Movement;
@@ -32,7 +33,7 @@ namespace Playmode.Ennemy.Strategies
         public void Act()
         {
             Vector3? target;
-            target = TargetEnemy();
+            target = TargetMethod.TargetEnemy(enemySensor);
 
             if(target != null)
             {
@@ -41,41 +42,11 @@ namespace Playmode.Ennemy.Strategies
             } else
             {
                 if (randomSearch == null)
-                    Search();
+                    randomSearch = TargetMethod.Search();
                 else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
-                    Search();
+                    randomSearch = TargetMethod.Search();
                 mover.MoveToward((Vector2)randomSearch);
             }
-        }
-
-        private Vector3? TargetEnemy()
-        {
-            if(enemySensor.EnnemiesInSight.Count() > 0)
-                return enemySensor.EnnemiesInSight.First().transform.position;
-            else
-                return null;
-        }
-
-        /*private Vector3? TargetMedkit()
-        {
-            if (pickableSensor.PickablesInSight.Count() > 0)
-                return pickableSensor.PickablesInSight.First().transform.position;
-            else
-                return null;
-        }
-        
-        private Vector3? TargetWeapon()
-        {
-            if (pickableSensor.PickablesInSight.Count() > 0)
-                return pickableSensor.PickablesInSight.First().transform.position;
-            else
-                return null;
-        }
-        */
-        private void Search()
-        {
-            randomSearch = new Vector2(UnityEngine.Random.Range(-CameraInfo.Width / 2, CameraInfo.Width / 2),
-                UnityEngine.Random.Range(-CameraInfo.Height / 2, CameraInfo.Height / 2));
         }
     }
 }

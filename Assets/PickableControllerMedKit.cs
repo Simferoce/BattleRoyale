@@ -9,20 +9,15 @@ namespace Playmode.Pickable
     {
         [SerializeField] private int healPoints;
 
-        private EnnemySensor enemySensor;
-
-        private void Awake()
+        public PickableControllerMedKit() 
         {
-            enemySensor = GetComponent<EnnemySensor>();
-            enemySensor.OnEnnemySeen += EnemySensor_OnEnnemySeen;
+            this.pickUpFunction = PickUpFunction;
         }
 
-        private void EnemySensor_OnEnnemySeen(Ennemy.EnnemyController ennemy)
+        public void PickUpFunction(Ennemy.EnnemyController ennemy)
         {
             ennemy.Heal(healPoints);
-            Destroy(this.gameObject);
         }
-        
     }
 }
 

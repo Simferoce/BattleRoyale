@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Playmode.Entity.Senses;
 using Playmode.Ennemy.BodyParts;
 using Playmode.Entity.Senses;
 using Playmode.Movement;
@@ -22,75 +23,33 @@ namespace Playmode.Ennemy.Strategies
         private float width => height * Camera.main.aspect;
 
 
-        public Camper(Mover mover, HandController handController, EnnemySensor enemySensor)
+        public Camper(Mover mover, HandController handController, EnnemySensor enemySensor, PickableSensor pickableSensor)
         {
             this.mover = mover;
             this.handController = handController;
 
             this.enemySensor = enemySensor;
+            this.pickableSensor = pickableSensor;
         }
 
         public void Act()
         {
             Vector3? target;
-            /*target = TargetMedkit();
+            target = TargetMethod.TargetMedkit(pickableSensor);
 
-            if(target != null)
+            if (target != null)
             {
-                mover.Follow((Vector3)target, 5f);
-                
-            } else
-            {
-                if (randomSearch == null)
-                    Search();
-                else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
-                    Search();
-                mover.Follow((Vector2)randomSearch, safeDistance);
-            }*/
-
-            target = TargetEnemy();
-            if(target != null)
-            {
-                mover.Follow((Vector3)target, 5f); 
-                mover.SetRotationToLookAt((Vector2)randomSearch);
-            } else
-            {
-                if (randomSearch == null)
-                    Search();
-                else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
-                    Search();
-                mover.Follow((Vector2)randomSearch, safeDistance);
+                mover.MoveToward((Vector2)target);
+                handController.Use();
             }
-        }
-
-        private Vector3? TargetEnemy()
-        {
-            if(enemySensor.EnnemiesInSight.Count() > 0)
-                return enemySensor.EnnemiesInSight.First().transform.position;
             else
-                return null;
-        }
-
-        /*private Vector3? TargetMedkit()
-        {
-            if (pickableSensor.PickablesInSight.Count() > 0)
-                return pickableSensor.PickablesInSight.First().transform.position;
-            else
-                return null;
-        }
-        
-        private Vector3? TargetWeapon()
-        {
-            if (pickableSensor.PickablesInSight.Count() > 0)
-                return pickableSensor.PickablesInSight.First().transform.position;
-            else
-                return null;
-        }
-        */
-        private void Search()
-        {
-            randomSearch = new Vector2(UnityEngine.Random.Range(-width / 2, width/2),
-                UnityEngine.Random.Range(-height / 2, height/2));
+            {
+                if (randomSearch == null)
+                    randomSearch = TargetMethod.Search();
+                else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
+                    randomSearch = TargetMethod.Search();
+                mover.MoveToward((Vector2)randomSearch);
+            }
         }
     }
 }
