@@ -24,8 +24,8 @@ namespace Playmode.Entity.Senses
 
         private void InitializeComponent()
         {
-            pickablesWeaponInSight = new HashSet<Pickable.PickableControllerWeapon>();
-            pickablesMedKitInSight = new HashSet<Pickable.PickableControllerMedKit>();
+            pickablesWeaponInSight = new List<Pickable.PickableControllerWeapon>();
+            pickablesMedKitInSight = new List<Pickable.PickableControllerMedKit>();
         }
 
         public void See(Pickable.PickableController pickable)

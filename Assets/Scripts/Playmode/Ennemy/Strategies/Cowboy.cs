@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Playmode.Ennemy.Strategies
+namespace Playmode.Ennemy.Strategies
 {
     public class Cowboy : IEnnemyStrategy
     {
@@ -36,20 +36,28 @@ namespace Assets.Scripts.Playmode.Ennemy.Strategies
 
         public void Act()
         {
-            PickableController target = TargetMethod.TargetWeapon(pickableSensor);
+            PickableControllerWeapon targetWeapon = TargetMethod.TargetWeapon(pickableSensor);
 
-            if (target != null)
+            if (targetWeapon != null)
             {
-                mover.MoveToward((Vector2)target.transform.position);
-                handController.Use();
+                mover.MoveToward((Vector2)targetWeapon.transform.position);
             }
             else
             {
-                if (randomSearch == null)
-                    randomSearch = TargetMethod.Search();
-                else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
-                    randomSearch = TargetMethod.Search();
-                mover.MoveToward((Vector2)randomSearch);
+                EnnemyController targetEnemy = TargetMethod.TargetEnemy(enemySensor);
+                if(targetEnemy != null)
+                {
+                    mover.MoveToward((Vector2)targetEnemy.transform.position);
+                    handController.Use();
+                } 
+                else
+                {
+                    if (randomSearch == null)
+                        randomSearch = TargetMethod.Search();
+                    else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
+                        randomSearch = TargetMethod.Search();
+                    mover.MoveToward((Vector2)randomSearch);
+                }
             }
         }
     }

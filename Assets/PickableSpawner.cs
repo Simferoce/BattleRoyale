@@ -8,7 +8,7 @@ namespace Playmode.Pickable
     {
         public void Spawn(GameObject pickable)
         {
-            GameObject pickableObject = Instantiate(pickable, this.transform.position, Quaternion.identity);
+            Instantiate(pickable, this.transform.position, Quaternion.identity);
         }
     }
 }

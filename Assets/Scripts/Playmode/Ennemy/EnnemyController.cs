@@ -126,11 +126,11 @@ namespace Playmode.Ennemy
                     break;
                 case EnnemyStrategy.Cowboy:
                     typeSign.GetComponent<SpriteRenderer>().sprite = cowboySprite;
-                    this.strategy = new Careful(mover, handController, ennemySensor, pickableSensor, health);
+                    this.strategy = new Cowboy(mover, handController, ennemySensor, pickableSensor);
                     break;
                 case EnnemyStrategy.Camper:
                     typeSign.GetComponent<SpriteRenderer>().sprite = camperSprite;
-                    this.strategy = new Careful(mover, handController, ennemySensor, pickableSensor, health);
+                    this.strategy = new Camper(mover, handController, ennemySensor, pickableSensor, health);
                     break;
                 default:
                     typeSign.GetComponent<SpriteRenderer>().sprite = normalSprite;
