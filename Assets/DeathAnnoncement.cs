@@ -18,6 +18,11 @@ public class DeathAnnoncement : MonoBehaviour {
         text = GetComponent<Text>();
     }
 
+    private void OnDisable()
+    {
+        eventHandlerEnemyDeath.OnEventPublished -= EventHandlerEnemyDeath_OnEventPublished;
+    }
+
     private void EventHandlerEnemyDeath_OnEventPublished(EnemyDeathData data)
     {
         text.text = data.name + " died.";

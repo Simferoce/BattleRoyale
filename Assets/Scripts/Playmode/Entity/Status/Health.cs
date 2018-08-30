@@ -50,7 +50,6 @@ namespace Playmode.Entity.Status
         public void Heal(int healthPoints)
         {
             HealthPoints += healthPoints;
-            Debug.Log("Healed " + healthPoints + " hp.");
         }
 
         private void NotifyDeath()

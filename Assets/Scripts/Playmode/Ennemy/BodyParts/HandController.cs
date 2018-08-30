@@ -44,7 +44,6 @@ namespace Playmode.Ennemy.BodyParts
             if (weapon != null)
             {               
                 weapon.Shoot();
-                Debug.Log(weapon.GetType());
             }
         }
     }
