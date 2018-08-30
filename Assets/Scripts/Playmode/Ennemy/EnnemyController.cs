@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Playmode.Ennemy.BodyParts;
 using Playmode.Ennemy.Strategies;
 using Playmode.Entity.Destruction;
@@ -30,8 +31,11 @@ namespace Playmode.Ennemy
         private PickableSensor pickableSensor;
         private HitSensor hitSensor;
         private HandController handController;
+        private bool invincible = false;
 
         public string Name { get; private set; }
+
+        public bool isEarlySearching { get; private set; }
 
         private IEnnemyStrategy strategy;
 
@@ -122,6 +126,7 @@ namespace Playmode.Ennemy
             body.GetComponent<SpriteRenderer>().color = color;
             sight.GetComponent<SpriteRenderer>().color = color;
             Name = name;
+            isEarlySearching = false;
             
             switch (strategy)
             {
@@ -131,24 +136,27 @@ namespace Playmode.Ennemy
                     break;
                 case EnnemyStrategy.Cowboy:
                     typeSign.GetComponent<SpriteRenderer>().sprite = cowboySprite;
-                    this.strategy = new Careful(mover, handController, ennemySensor, pickableSensor, health);
+                    this.strategy = new Cowboy(mover, handController, ennemySensor, pickableSensor);
                     break;
                 case EnnemyStrategy.Camper:
                     typeSign.GetComponent<SpriteRenderer>().sprite = camperSprite;
-                    this.strategy = new Careful(mover, handController, ennemySensor, pickableSensor, health);
+                    this.strategy = new Camper(mover, handController, ennemySensor, pickableSensor, health);
                     break;
                 default:
                     typeSign.GetComponent<SpriteRenderer>().sprite = normalSprite;
-                    this.strategy = new Careful(mover, handController, ennemySensor, pickableSensor, health);
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
             }
         }
 
         private void OnHit(int hitPoints)
         {
-            //Debug.Log("OW, I'm hurt! I'm really much hurt!!!");
-
-            health.Hit(hitPoints);
+            if (invincible == false)
+            {
+                //Debug.Log("OW, I'm hurt! I'm really much hurt!!!");
+                health.Hit(hitPoints);
+            }
+            
         }
 
         private void OnDeath()
@@ -191,6 +199,28 @@ namespace Playmode.Ennemy
         private void NotifyOnEnemyDeath()
         {
             OnDeathEnemy?.Invoke(this);
+        }
+        public void EarlyMedpackSearch(int timeForSearch)
+        {
+            StartCoroutine(EarlyMedpackSearchRoutine(timeForSearch));
+        }
+
+        private IEnumerator EarlyMedpackSearchRoutine(int timeForSearch)
+        {
+            isEarlySearching = true;
+           yield return new WaitForSeconds(timeForSearch);
+            isEarlySearching = false;
+        }
+
+        public void ActivateInvincibility(int timeInvincible)
+        {
+            StartCoroutine(ActivateInvincibilityRoutine(timeInvincible));
+        }
+        private IEnumerator ActivateInvincibilityRoutine(int timeInvincible)
+        {
+            invincible = true;
+            yield return new WaitForSeconds(timeInvincible);
+            invincible = false;
         }
     }
 }

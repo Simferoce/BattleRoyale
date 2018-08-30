@@ -1,9 +1,12 @@
-﻿using Playmode.Ennemy.BodyParts;
+﻿using System.Collections;
+using Playmode.Ennemy.BodyParts;
 using Playmode.Entity.Senses;
 using Playmode.Entity.Status;
 using Playmode.Movement;
 using Playmode.Pickable;
 using UnityEngine;
+using UnityEngine.Jobs;
+using System;
 
 namespace Playmode.Ennemy.Strategies
 {
@@ -18,6 +21,7 @@ namespace Playmode.Ennemy.Strategies
         private Vector2? randomSearch = null;
         private float sensibilityProximity = 0.5f;
         private float medDistance = 1.0f;
+        private int secondsToPickMedpack = 10;
 
 
         public Camper(Mover mover, HandController handController, EnnemySensor enemySensor, PickableSensor pickableSensor, Health health)
@@ -33,7 +37,6 @@ namespace Playmode.Ennemy.Strategies
         public void Act()
         {
             PickableControllerMedKit medkit = TargetMethod.TargetMedkit(pickableSensor);
-            
             if (pickableMedkit == null && medkit != null)
             {
                 pickableMedkit = medkit;
@@ -41,31 +44,31 @@ namespace Playmode.Ennemy.Strategies
             }
 
             if (pickableMedkit != null)
-            {
-                if (Vector2.Distance((Vector2)pickableMedkit.transform.position,mover.transform.position) < medDistance)
-                {
-                    if (health.HealthPoints>30)
+            {               
+                    if (Vector2.Distance((Vector2)pickableMedkit.transform.position,mover.transform.position) < medDistance)
                     {
-                        EnnemyController targetEnemy = TargetMethod.TargetEnemy(enemySensor);
-                        if (targetEnemy == null)
-                        {                           
-                            mover.Rotate(-1);
+                        if (health.HealthPoints>30)
+                        {
+                            EnnemyController targetEnemy = TargetMethod.TargetEnemy(enemySensor);
+                            if (targetEnemy == null)
+                            {                           
+                                mover.Rotate(-1);
+                            }
+                            else
+                            {
+                                mover.SetRotationToLookAt((Vector2)targetEnemy.transform.position);
+                                handController.Use();
+                            } 
                         }
                         else
-                        {
-                            mover.SetRotationToLookAt((Vector2)targetEnemy.transform.position);
-                            handController.Use();
-                        } 
+                        {                        
+                            mover.MoveToward(pickableMedkit.transform.position);
+                        }
                     }
                     else
-                    {                        
+                    {
                         mover.MoveToward(pickableMedkit.transform.position);
-                    }
-                }
-                else
-                {
-                    mover.MoveToward(pickableMedkit.transform.position);
-                }
+                    }            
             }
             else
             {
@@ -76,11 +79,7 @@ namespace Playmode.Ennemy.Strategies
                 }
                 else
                 {
-                    if (randomSearch == null)
-                        randomSearch = TargetMethod.Search();
-                    else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
-                        randomSearch = TargetMethod.Search();
-                    mover.MoveToward((Vector2)randomSearch);
+                    TargetMethod.SearchEnemyOrPickable(mover, sensibilityProximity, ref randomSearch);
                 }
             }
         }

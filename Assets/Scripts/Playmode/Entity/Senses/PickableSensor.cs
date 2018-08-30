@@ -8,14 +8,12 @@ namespace Playmode.Entity.Senses
 
     public class PickableSensor : MonoBehaviour
     {
-        private ICollection<Pickable.PickableControllerWeapon> pickablesWeaponInSight;
-        private ICollection<Pickable.PickableControllerMedKit> pickablesMedKitInSight;
+        private ICollection<Pickable.PickableController> pickablesInSight;
 
         public event PickableSensorEventHandler OnPickableSeen;
         public event PickableSensorEventHandler OnPickableSightLost;
 
-        public IEnumerable<Pickable.PickableControllerWeapon> PickablesWeaponInSight => pickablesWeaponInSight;
-        public IEnumerable<Pickable.PickableControllerMedKit> PickablesMedKitInSight => pickablesMedKitInSight;
+        public IEnumerable<Pickable.PickableController> PickablesInSight => pickablesInSight;
 
         private void Awake()
         {
@@ -24,17 +22,12 @@ namespace Playmode.Entity.Senses
 
         private void InitializeComponent()
         {
-            pickablesWeaponInSight = new List<Pickable.PickableControllerWeapon>();
-            pickablesMedKitInSight = new List<Pickable.PickableControllerMedKit>();
+            pickablesInSight = new List<Pickable.PickableController>();
         }
 
         public void See(Pickable.PickableController pickable)
         {
-            if (pickable is PickableControllerWeapon)
-                pickablesWeaponInSight.Add(pickable as PickableControllerWeapon);
-            else if (pickable is PickableControllerMedKit)
-                pickablesMedKitInSight.Add(pickable as PickableControllerMedKit);
-
+            pickablesInSight.Add(pickable);
             pickable.OnPickUp += Pickable_OnPickUp;
 
             NotifyPickableSeen(pickable);
@@ -42,21 +35,13 @@ namespace Playmode.Entity.Senses
 
         private void Pickable_OnPickUp(PickableController pickableController)
         {
-            if (pickableController is PickableControllerWeapon)
-                pickablesWeaponInSight.Remove(pickableController as PickableControllerWeapon);
-            else if (pickableController is PickableControllerMedKit)
-                pickablesMedKitInSight.Remove(pickableController as PickableControllerMedKit);
+            pickablesInSight.Remove(pickableController);
         }
 
         public void LooseSightOf(Pickable.PickableController pickable)
-        {
-            if (pickable is PickableControllerWeapon)
-                pickablesWeaponInSight.Remove(pickable as PickableControllerWeapon);
-            else if (pickable is PickableControllerMedKit)
-                pickablesMedKitInSight.Remove(pickable as PickableControllerMedKit);
-
+        {      
+            pickablesInSight.Remove(pickable);
             pickable.OnPickUp -= Pickable_OnPickUp;
-
             NotifyPickableSightLost(pickable);
         }
 

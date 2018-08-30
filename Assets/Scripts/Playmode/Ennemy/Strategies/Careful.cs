@@ -38,10 +38,9 @@ namespace Playmode.Ennemy.Strategies
 		public void Act()
 		{
 			ConfigureDistance();
-			if (health.HealthPoints < 40)
+			if (health.HealthPoints < 70)
 			{
-				Debug.Log("careful");
-				if (health.HealthPoints < 20)
+				if (health.HealthPoints < 40)
 				{
 					PickableControllerMedKit medkit = TargetMethod.TargetMedkit(pickableSensor);
 
@@ -78,10 +77,8 @@ namespace Playmode.Ennemy.Strategies
 			}
 			else
 			{
-				Debug.Log("cowboy");
 				cowboy.Act();
 			}
-
 		}
 
 		private void OnPickUp(PickableController controller)
