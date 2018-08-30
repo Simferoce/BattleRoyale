@@ -18,7 +18,7 @@ namespace Playmode.Ennemy.Strategies
         private readonly EnnemySensor enemySensor;
         private Vector2? randomSearch = null;
         private float sensibilityProximity = 0.5f;
-        private float safeDistance = 5.0f;
+        private readonly float distanceFollow = 1f;
 
 
         public Normal(Mover mover, HandController handController, EnnemySensor enemySensor)
@@ -35,14 +35,14 @@ namespace Playmode.Ennemy.Strategies
 
             if(target != null)
             {
-                mover.MoveToward((Vector2)target.transform.position);
+                mover.Follow(target.transform.position, distanceFollow);
                 handController.Use();
             }
             else
             {
                 if (randomSearch == null)
                     randomSearch = TargetMethod.Search();
-                else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
+                else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
                     randomSearch = TargetMethod.Search();
                 mover.MoveToward((Vector2)randomSearch);
             }

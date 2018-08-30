@@ -50,8 +50,7 @@ namespace Playmode.Ennemy.Strategies
 				{
 					if (randomSearch == null)
 						randomSearch = TargetMethod.Search();
-					else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance <
-					         sensibilityProximity)
+					else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
 						randomSearch = TargetMethod.Search();
 					mover.MoveToward((Vector2) randomSearch);
 				}
@@ -75,8 +74,7 @@ namespace Playmode.Ennemy.Strategies
 					{
 						if (randomSearch == null)
 							randomSearch = TargetMethod.Search();
-						else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance <
-						         sensibilityProximity)
+						else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
 							randomSearch = TargetMethod.Search();
 						mover.MoveToward((Vector2) randomSearch);
 					}

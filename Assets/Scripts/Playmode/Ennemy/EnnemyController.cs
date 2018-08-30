@@ -134,7 +134,7 @@ namespace Playmode.Ennemy
                     break;
                 default:
                     typeSign.GetComponent<SpriteRenderer>().sprite = normalSprite;
-                    this.strategy = new Careful(mover, handController, ennemySensor, pickableSensor, health);
+                    this.strategy = new Normal(mover, handController, ennemySensor);
                     break;
             }
         }

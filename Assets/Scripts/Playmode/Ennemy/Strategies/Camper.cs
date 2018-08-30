@@ -21,10 +21,7 @@ namespace Playmode.Ennemy.Strategies
         private PickableControllerMedKit pickableMedkit;
         private Vector2? randomSearch = null;
         private float sensibilityProximity = 0.5f;
-        private float safeDistance = 5.0f;
         private float medDistance = 1.0f;
-        private float height => 2f * Camera.main.orthographicSize;
-        private float width => height * Camera.main.aspect;
 
 
         public Camper(Mover mover, HandController handController, EnnemySensor enemySensor, PickableSensor pickableSensor, Health health)
@@ -49,7 +46,7 @@ namespace Playmode.Ennemy.Strategies
 
             if (pickableMedkit != null)
             {
-                if (Vector2.Distance((Vector2)pickableMedkit.transform.position,mover.transform.position)<medDistance)
+                if (Vector2.Distance((Vector2)pickableMedkit.transform.position,mover.transform.position) < medDistance)
                 {
                     if (health.HealthPoints>30)
                     {
@@ -85,7 +82,7 @@ namespace Playmode.Ennemy.Strategies
                 {
                     if (randomSearch == null)
                         randomSearch = TargetMethod.Search();
-                    else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
+                    else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
                         randomSearch = TargetMethod.Search();
                     mover.MoveToward((Vector2)randomSearch);
                 }
