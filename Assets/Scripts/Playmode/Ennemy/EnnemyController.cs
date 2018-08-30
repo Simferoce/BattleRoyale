@@ -31,6 +31,8 @@ namespace Playmode.Ennemy
         private HitSensor hitSensor;
         private HandController handController;
 
+        public string Name { get; private set; }
+
         private IEnnemyStrategy strategy;
 
         public event DeathEventHandler OnDeathEnemy;
@@ -75,13 +77,11 @@ namespace Playmode.Ennemy
             pickableSensor = rootTransform.GetComponentInChildren<PickableSensor>();
             hitSensor = rootTransform.GetComponentInChildren<HitSensor>();
             handController = hand.GetComponent<HandController>();
-
-            Configure(EnnemyStrategy.Normal, Color.black);
         }
 
         private void CreateStartingWeapon()
         {
-            handController.Hold(Instantiate(
+            handController.Take(Instantiate(
                 startingWeaponPrefab,
                 Vector3.zero,
                 Quaternion.identity
@@ -100,6 +100,10 @@ namespace Playmode.Ennemy
 
         private void Update()
         {
+            if(strategy == null)
+            {
+                Configure(EnnemyStrategy.Normal, Color.black, "Test");
+            }
             strategy.Act();
         }
 
@@ -113,10 +117,11 @@ namespace Playmode.Ennemy
             health.OnDeath -= OnDeath;
         }
 
-        public void Configure(EnnemyStrategy strategy, Color color)
+        public void Configure(EnnemyStrategy strategy, Color color, string name)
         {
             body.GetComponent<SpriteRenderer>().color = color;
             sight.GetComponent<SpriteRenderer>().color = color;
+            Name = name;
             
             switch (strategy)
             {
@@ -175,7 +180,7 @@ namespace Playmode.Ennemy
 
         public void Take(GameObject gameObject)
         {
-            handController.Hold(gameObject);
+            handController.Take(gameObject);
         }
 
         public void Heal(int healthPoints)

@@ -14,6 +14,11 @@ namespace Playmode.Ennemy
             Color.magenta, Color.red, Color.yellow, new Color(255, 125, 0, 255)
         };
 
+        private static readonly String[] DefaultNames =
+        {
+            "Jonnhy", "Bob", "Leo", "Mike", "Pierre", "Victor", "Vladimir", "Donald", "Yannick"
+        };
+
         private static readonly EnnemyStrategy[] DefaultStrategies =
         {
             EnnemyStrategy.Normal,
@@ -24,6 +29,7 @@ namespace Playmode.Ennemy
 
         [SerializeField] private GameObject ennemyPrefab;
         [SerializeField] private Color[] colors = DefaultColors;
+        [SerializeField] private String[] names = DefaultNames;
 
         private void Awake()
         {
@@ -50,20 +56,22 @@ namespace Playmode.Ennemy
         {
             var stragegyProvider = new LoopingEnumerator<EnnemyStrategy>(DefaultStrategies);
             var colorProvider = new LoopingEnumerator<Color>(colors);
+            var nameProvider = new LoopingEnumerator<string>(names);
 
             for (var i = 0; i < transform.childCount; i++)
                 SpawnEnnemy(
                     transform.GetChild(i).position,
                     stragegyProvider.Next(),
-                    colorProvider.Next()
+                    colorProvider.Next(),
+                    nameProvider.Next()
                 );
         }
 
-        private void SpawnEnnemy(Vector3 position, EnnemyStrategy strategy, Color color)
+        private void SpawnEnnemy(Vector3 position, EnnemyStrategy strategy, Color color, string name)
         {
             Instantiate(ennemyPrefab, position, Quaternion.identity)
                 .GetComponentInChildren<EnnemyController>()
-                .Configure(strategy, color);
+                .Configure(strategy, color, name);
         }
     }
 }

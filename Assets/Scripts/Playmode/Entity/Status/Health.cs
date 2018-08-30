@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Playmode.Util.Values;
+using System;
 using UnityEngine;
+using Playmode.Event;
+using Playmode.Ennemy;
 
 namespace Playmode.Entity.Status
 {
@@ -8,6 +11,9 @@ namespace Playmode.Entity.Status
     public class Health : MonoBehaviour
     {
         [SerializeField] private int healthPoints = 100;
+
+        private EventHandlerEnemyDeath enemyDeathChannel;
+        private EnnemyController ennemyController;
 
         public event HealthEventHandler OnDeath;
 
@@ -25,6 +31,9 @@ namespace Playmode.Entity.Status
         private void Awake()
         {
             ValidateSerialisedFields();
+
+            enemyDeathChannel = GameObject.FindWithTag(Tags.MainController).GetComponent<EventHandlerEnemyDeath>();
+            ennemyController = GetComponent<EnnemyController>();
         }
 
         private void ValidateSerialisedFields()
@@ -46,6 +55,7 @@ namespace Playmode.Entity.Status
 
         private void NotifyDeath()
         {
+            enemyDeathChannel.Publish(new EnemyDeathData(ennemyController.Name));
             OnDeath?.Invoke();
         }
     }
