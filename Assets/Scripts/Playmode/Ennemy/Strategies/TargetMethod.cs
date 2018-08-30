@@ -1,15 +1,10 @@
 ﻿using Playmode.Entity.Senses;
 using Playmode.Util.Values;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Playmode.Pickable;
 using UnityEngine;
-using Playmode.Ennemy;
 
-namespace Assets.Scripts.Playmode.Entity.Senses
+namespace Playmode.Ennemy.Strategies
 {
     public static class TargetMethod
     {

@@ -46,7 +46,7 @@ namespace Playmode.Entity.Status
 
         private void NotifyDeath()
         {
-            if (OnDeath != null) OnDeath();
+            OnDeath?.Invoke();
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Assets.Scripts.Playmode.Entity.Senses;
-using Playmode.Ennemy.BodyParts;
+﻿using Playmode.Ennemy.BodyParts;
 using Playmode.Entity.Senses;
 using Playmode.Entity.Status;
 using Playmode.Movement;
