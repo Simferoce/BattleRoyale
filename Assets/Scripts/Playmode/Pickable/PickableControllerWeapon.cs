@@ -4,8 +4,6 @@ namespace Playmode.Pickable
 {
     public class PickableControllerWeapon : PickableController
     {
-        [SerializeField] GameObject hold;
-
         public PickableControllerWeapon()
         {
             this.pickUpFunction = PickUpFunction;
@@ -13,7 +11,7 @@ namespace Playmode.Pickable
 
         public void PickUpFunction(Ennemy.EnnemyController ennemy)
         {
-            ennemy.Take(Instantiate(hold));
+            ennemy.Take(this.transform.parent.gameObject);
         }
     }
 }

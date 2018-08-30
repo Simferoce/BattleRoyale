@@ -9,6 +9,7 @@ namespace Playmode.Weapon
 
         public override void Shoot()
         {
+            Debug.Log("Shooting?");
             base.Shoot();
         }
 

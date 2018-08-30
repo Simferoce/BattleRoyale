@@ -197,11 +197,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickables:
-  - {fileID: 1072535679243536, guid: 19e0ea007fd2d0b4e99e2089f8c31e87, type: 2}
-  - {fileID: 1357872159379938, guid: a4f4a7ba46ea5fb448fa3837e591eb4d, type: 2}
+  - {fileID: 1908545287252438, guid: 487fffd2d666e4447a896d5053e1e8e8, type: 2}
+  - {fileID: 1332803272412266, guid: b106da0b56972574a90a24a2a3aef302, type: 2}
   - {fileID: 1594273403483344, guid: ef4a12d7f9f31e34bb4125156d0f27cb, type: 2}
   spawner: {fileID: 1261953868439324, guid: 0568e962356d6c741ad7cf0064c8f786, type: 2}
-  numbOfSpawners: 50
+  numbOfSpawners: 100
 --- !u!4 &707874997
 Transform:
   m_ObjectHideFlags: 0
@@ -478,6 +478,16 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 0.49019608, b: 0, a: 1}
   - {r: 255, g: 100, b: 0, a: 255}
+  names:
+  - Jonnhy
+  - Bob
+  - Leo
+  - Mike
+  - Pierre
+  - Victor
+  - Vladimir
+  - Donald
+  - Yannick
 --- !u!4 &2073673047
 Transform:
   m_ObjectHideFlags: 0

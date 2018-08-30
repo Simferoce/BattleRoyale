@@ -9,15 +9,15 @@ namespace Playmode.Ennemy.BodyParts
     {
         private WeaponController weapon;
         
-        public void Hold(GameObject weaponObject)
+        public void Take(GameObject weaponObject)
         {
             if (weaponObject != null)
             {
-
                 WeaponController newWeapon = weaponObject.GetComponentInChildren<WeaponController>();
                 if (this.weapon != null && weapon.GetType().Equals(newWeapon.GetType()))
                 {
                     this.weapon.UpdatePower();
+                    Destroy(weaponObject);
                 }
                 else if(this.weapon != null)
                 {
@@ -43,7 +43,8 @@ namespace Playmode.Ennemy.BodyParts
         {
             if (weapon != null)
             {               
-                weapon.Shoot();                  
+                weapon.Shoot();
+                Debug.Log(weapon.GetType());
             }
         }
     }
