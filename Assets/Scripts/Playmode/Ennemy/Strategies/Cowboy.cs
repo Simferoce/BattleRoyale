@@ -1,39 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Assets.Scripts.Playmode.Entity.Senses;
+﻿using Assets.Scripts.Playmode.Entity.Senses;
+using Playmode.Ennemy;
 using Playmode.Ennemy.BodyParts;
+using Playmode.Ennemy.Strategies;
 using Playmode.Entity.Senses;
 using Playmode.Movement;
 using Playmode.Pickable;
-using Playmode.Util.Values;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Playmode.Ennemy.Strategies
+namespace Assets.Scripts.Playmode.Ennemy.Strategies
 {
-    class Normal : IEnnemyStrategy
+    public class Cowboy : IEnnemyStrategy
     {
         private readonly Mover mover;
         private readonly HandController handController;
         private readonly EnnemySensor enemySensor;
+        private readonly PickableSensor pickableSensor;
         private Vector2? randomSearch = null;
         private float sensibilityProximity = 0.5f;
         private float safeDistance = 5.0f;
 
 
-        public Normal(Mover mover, HandController handController, EnnemySensor enemySensor)
+        public Cowboy(Mover mover, HandController handController, EnnemySensor enemySensor, PickableSensor pickableSensor)
         {
             this.mover = mover;
             this.handController = handController;
 
             this.enemySensor = enemySensor;
+            this.pickableSensor = pickableSensor;
         }
 
         public void Act()
         {
-            EnnemyController target = TargetMethod.TargetEnemy(enemySensor);
+            PickableController target = TargetMethod.TargetWeapon(pickableSensor);
 
-            if(target != null)
+            if (target != null)
             {
                 mover.MoveToward((Vector2)target.transform.position);
                 handController.Use();

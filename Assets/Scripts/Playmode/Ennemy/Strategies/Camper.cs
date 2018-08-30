@@ -53,14 +53,14 @@ namespace Playmode.Ennemy.Strategies
                 {
                     if (health.HealthPoints>30)
                     {
-                        Vector3? targetEnemy = TargetMethod.TargetEnemy(enemySensor);
+                        EnnemyController targetEnemy = TargetMethod.TargetEnemy(enemySensor);
                         if (targetEnemy == null)
                         {                           
                             mover.Rotate(-1);
                         }
                         else
                         {
-                            mover.SetRotationToLookAt((Vector2)targetEnemy);
+                            mover.SetRotationToLookAt((Vector2)targetEnemy.transform.position);
                             handController.Use();
                         } 
                     }

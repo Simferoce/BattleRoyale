@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Playmode.Weapon
 {
-    public abstract class WeaponController : MonoBehaviour
+    public class WeaponController : MonoBehaviour
     {
         [Header("Behaviour")] [SerializeField] protected GameObject bulletPrefab;
         [SerializeField] private float fireDelayInSeconds = 1f;
@@ -41,6 +41,9 @@ namespace Playmode.Weapon
             }          
         }
 
-        public abstract void UpdatePower();
+        public virtual void UpdatePower()
+        {
+
+        }
     }
 }

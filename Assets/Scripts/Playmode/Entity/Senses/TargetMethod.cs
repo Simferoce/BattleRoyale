@@ -7,15 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Playmode.Pickable;
 using UnityEngine;
+using Playmode.Ennemy;
 
 namespace Assets.Scripts.Playmode.Entity.Senses
 {
     public static class TargetMethod
     {
-        public static Vector3? TargetEnemy(EnnemySensor enemySensor)
+        public static EnnemyController TargetEnemy(EnnemySensor enemySensor)
         {
             if (enemySensor.EnnemiesInSight.Count() > 0)
-                return enemySensor.EnnemiesInSight.First()?.transform.position;
+                return enemySensor.EnnemiesInSight.First();
             else
                 return null;
         }
@@ -27,10 +28,10 @@ namespace Assets.Scripts.Playmode.Entity.Senses
                 return null;
         }
 
-        public static Vector3? TargetWeapon(PickableSensor pickableSensor)
+        public static PickableController TargetWeapon(PickableSensor pickableSensor)
         {
             if (pickableSensor.PickablesWeaponInSight.Count() > 0)
-                return pickableSensor.PickablesWeaponInSight.First()?.transform.position;
+                return pickableSensor.PickablesWeaponInSight.First();
             else
                 return null;
         }
