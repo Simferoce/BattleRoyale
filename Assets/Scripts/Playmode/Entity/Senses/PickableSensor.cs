@@ -1,7 +1,7 @@
 ﻿using Playmode.Pickable;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Playmode.Entity.Senses
 {
     public delegate void PickableSensorEventHandler(Pickable.PickableController weaponController);

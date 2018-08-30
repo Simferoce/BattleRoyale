@@ -1,5 +1,4 @@
-﻿using Boo.Lang.Environments;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Playmode.Weapon
 {

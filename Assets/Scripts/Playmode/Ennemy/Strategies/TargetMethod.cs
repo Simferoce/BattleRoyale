@@ -7,10 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Playmode.Pickable;
 using UnityEngine;
-using Playmode.Ennemy;
 using Playmode.Movement;
 
-namespace Assets.Scripts.Playmode.Entity.Senses
+namespace Playmode.Ennemy.Strategies
 {
     public static class TargetMethod
     {

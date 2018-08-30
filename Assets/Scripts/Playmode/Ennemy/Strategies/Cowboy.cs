@@ -1,15 +1,7 @@
-﻿using Assets.Scripts.Playmode.Entity.Senses;
-using Playmode.Ennemy;
-using Playmode.Ennemy.BodyParts;
-using Playmode.Ennemy.Strategies;
+﻿using Playmode.Ennemy.BodyParts;
 using Playmode.Entity.Senses;
 using Playmode.Movement;
 using Playmode.Pickable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Playmode.Ennemy.Strategies

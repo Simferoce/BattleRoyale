@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4162923453424972}
   - component: {fileID: 212062398621267176}
   - component: {fileID: 114528511461670924}
-  - component: {fileID: 114365648383534028}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -299,19 +298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  rotateSpeed: 90
---- !u!114 &114365648383534028
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1201874307975926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f86b820faf84451fa53dba772fca7f07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
   rotateSpeed: 90
 --- !u!114 &114434491710286188
 MonoBehaviour:

@@ -6,9 +6,5 @@
         {
             base.Shoot();
         }
-
-        public override void UpdatePower()
-        {
-        }
     }
 }
