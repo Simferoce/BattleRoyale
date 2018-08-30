@@ -27,7 +27,7 @@ namespace Playmode.Weapon
 
         public override void UpdatePower()
         {
-            damageModifier += damageModifier;
+            damageModifier += upgradeDamage;
         }
     }
 }

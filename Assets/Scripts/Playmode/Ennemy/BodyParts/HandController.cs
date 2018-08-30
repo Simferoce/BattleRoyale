@@ -7,18 +7,7 @@ namespace Playmode.Ennemy.BodyParts
 {
     public class HandController : MonoBehaviour
     {
-        private Mover mover;
         private WeaponController weapon;
-
-        private void Awake()
-        {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            mover = GetComponent<AnchoredMover>();
-        }
         
         public void Hold(GameObject weaponObject)
         {

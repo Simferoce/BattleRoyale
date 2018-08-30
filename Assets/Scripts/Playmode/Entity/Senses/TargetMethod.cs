@@ -28,7 +28,7 @@ namespace Assets.Scripts.Playmode.Entity.Senses
                 return null;
         }
 
-        public static PickableController TargetWeapon(PickableSensor pickableSensor)
+        public static PickableControllerWeapon TargetWeapon(PickableSensor pickableSensor)
         {
             if (pickableSensor.PickablesWeaponInSight.Count() > 0)
                 return pickableSensor.PickablesWeaponInSight.First();

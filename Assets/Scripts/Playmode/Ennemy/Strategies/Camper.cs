@@ -76,11 +76,19 @@ namespace Playmode.Ennemy.Strategies
             }
             else
             {
-                if (randomSearch == null)
-                    randomSearch = TargetMethod.Search();
-                else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
-                    randomSearch = TargetMethod.Search();
-                mover.MoveToward((Vector2)randomSearch);
+                PickableControllerWeapon pickableWeapon = TargetMethod.TargetWeapon(pickableSensor);
+                if (pickableWeapon != null)
+                {
+                    mover.MoveToward(pickableWeapon.transform.position);
+                }
+                else
+                {
+                    if (randomSearch == null)
+                        randomSearch = TargetMethod.Search();
+                    else if ((randomSearch - mover.transform.position).Value.magnitude - safeDistance < sensibilityProximity)
+                        randomSearch = TargetMethod.Search();
+                    mover.MoveToward((Vector2)randomSearch);
+                }
             }
         }
 

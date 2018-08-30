@@ -23,7 +23,7 @@ namespace Playmode.Entity.Senses
 
         private void InitializeComponent()
         {
-            ennemiesInSight = new HashSet<EnnemyController>();
+            ennemiesInSight = new List<EnnemyController>();
         }
 
         public void See(EnnemyController ennemy)
