@@ -48,11 +48,7 @@ namespace Playmode.Ennemy.Strategies
 				}
 				else
 				{
-					if (randomSearch == null)
-						randomSearch = TargetMethod.Search();
-					else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
-						randomSearch = TargetMethod.Search();
-					mover.MoveToward((Vector2) randomSearch);
+					TargetMethod.SearchEnemyOrPickable(mover, sensibilityProximity,ref randomSearch);
 				}
 			}
 			else
@@ -72,11 +68,7 @@ namespace Playmode.Ennemy.Strategies
 					}
 					else
 					{
-						if (randomSearch == null)
-							randomSearch = TargetMethod.Search();
-						else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
-							randomSearch = TargetMethod.Search();
-						mover.MoveToward((Vector2) randomSearch);
+						TargetMethod.SearchEnemyOrPickable(mover, sensibilityProximity, ref randomSearch);
 					}
 				}
 			}
@@ -86,6 +78,6 @@ namespace Playmode.Ennemy.Strategies
 		{
 			pickableMedkit.OnPickUp -= OnPickUp;
 			pickableMedkit = null;
-		}
+		}		
 	}
 }

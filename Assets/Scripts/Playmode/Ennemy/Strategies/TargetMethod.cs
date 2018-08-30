@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Playmode.Pickable;
 using UnityEngine;
 using Playmode.Ennemy;
+using Playmode.Movement;
 
 namespace Assets.Scripts.Playmode.Entity.Senses
 {
@@ -40,6 +41,14 @@ namespace Assets.Scripts.Playmode.Entity.Senses
         {
             return new Vector2(UnityEngine.Random.Range(-CameraInfo.Width / 2, CameraInfo.Width / 2),
                 UnityEngine.Random.Range(-CameraInfo.Height / 2, CameraInfo.Height / 2));
+        }
+        public static void SearchEnemyOrPickable(Mover mover, float sensibilityProximity, ref Vector2? randomSearch)
+        {
+            if (randomSearch == null)
+                randomSearch = TargetMethod.Search();
+            else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
+                randomSearch = TargetMethod.Search();
+            mover.MoveToward((Vector2) randomSearch);
         }
     } 
 }
