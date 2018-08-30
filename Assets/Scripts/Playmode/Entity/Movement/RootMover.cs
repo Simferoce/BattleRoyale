@@ -46,8 +46,6 @@ namespace Playmode.Movement
                 MoveToward(target);
             } else
             {
-                //careful
-                MoveToward(-1*target);
                 SetRotationToLookAt(target);
             }
         }
@@ -57,6 +55,24 @@ namespace Playmode.Movement
             Vector3 dir = position - rootTransform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             rootTransform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        }
+
+        public override void KeepDistance(Vector3 target, float distance)
+        {
+            float distanceWithTarget = Vector2.Distance((Vector2)target, (Vector2)rootTransform.transform.position);
+            if(distanceWithTarget >= distance)
+            {
+                MoveToward(target);
+            } else
+            {
+                MoveBackward(target);
+            }
+        }
+
+        public override void MoveBackward(Vector3 destination)
+        {
+            SetRotationToLookAt(destination);
+            Move(new Vector3(0, -speed * Time.deltaTime,0));
         }
     }
 }

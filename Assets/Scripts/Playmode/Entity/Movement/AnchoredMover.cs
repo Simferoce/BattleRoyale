@@ -46,5 +46,15 @@ namespace Playmode.Movement
         {
             throw new System.NotImplementedException();
         }
+
+        public override void KeepDistance(Vector3 target, float distance)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void MoveBackward(Vector3 destination)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -33,5 +33,9 @@ namespace Playmode.Movement
         public abstract void MoveToward(Vector3 destination);
 
         public abstract void Follow(Vector3 target, float distance);
+
+        public abstract void KeepDistance(Vector3 target, float distance);
+
+        public abstract void MoveBackward(Vector3 destination);
     }
 }
