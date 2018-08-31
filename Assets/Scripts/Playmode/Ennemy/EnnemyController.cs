@@ -79,7 +79,6 @@ namespace Playmode.Ennemy
         {
             health = transform.parent.GetComponentInChildren<Health>();
             mover = GetComponent<Mover>();
-
             var rootTransform = transform.root;
             ennemySensor = rootTransform.GetComponentInChildren<EnnemySensor>();
             pickableSensor = rootTransform.GetComponentInChildren<PickableSensor>();
