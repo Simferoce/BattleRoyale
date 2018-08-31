@@ -22,7 +22,14 @@ namespace Playmode.Entity.Senses
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            other.GetComponent<Entity.Senses.HitSensor>()?.Hit(hitPoints, ShooterName);
+            HitSensor hitSensor = other.GetComponent<Entity.Senses.HitSensor>();
+            if(hitSensor != null)
+            {
+                hitSensor.Hit(hitPoints, ShooterName);
+                Destroy(this.transform.parent.gameObject);
+            }
+
+
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections;
 using Playmode.Ennemy.BodyParts;
 using Playmode.Ennemy.Strategies;
-using Playmode.Entity.Destruction;
 using Playmode.Entity.Senses;
 using Playmode.Entity.Status.Health;
 using Playmode.Event;
@@ -32,7 +31,6 @@ namespace Playmode.Ennemy
 
         private Health health;
         private Mover mover;
-        private Destroyer destroyer;
         private EnnemySensor ennemySensor;
         private PickableSensor pickableSensor;
         private HitSensor hitSensor;
@@ -81,7 +79,6 @@ namespace Playmode.Ennemy
         {
             health = transform.parent.GetComponentInChildren<Health>();
             mover = GetComponent<Mover>();
-            destroyer = GetComponent<RootDestroyer>();
 
             var rootTransform = transform.root;
             ennemySensor = rootTransform.GetComponentInChildren<EnnemySensor>();
@@ -164,7 +161,7 @@ namespace Playmode.Ennemy
             {
                 NotifyOnEnemyDeath();
                 enemyDeathChannel.Publish(new EnemyDeathData(Name, lastEnemyThatHitName));
-                destroyer.Destroy();
+                Destroy(this.transform.parent.gameObject);
             }
         }
 
