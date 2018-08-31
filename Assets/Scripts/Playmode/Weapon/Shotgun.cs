@@ -1,4 +1,5 @@
-﻿using Playmode.Entity.Senses;
+﻿using Playmode.Ennemy;
+using Playmode.Entity.Senses;
 using UnityEngine;
 
 namespace Playmode.Weapon
@@ -11,15 +12,16 @@ namespace Playmode.Weapon
 
         private float angleEntreBalles => angle / (nbBullets - 1);
         
-		public override void Shoot()
+		public override void Shoot(EnnemyController ennemyController)
 		{
             if (CanShoot)
 			{
                 for (int i = 0; i < nbBullets; ++i)
 				{
-
                     GameObject bullet= Instantiate(bulletPrefab, transform.position, transform.rotation);
-                    bullet.GetComponentInChildren<HitStimulus>().HitPoints += damageModifier;
+                    HitStimulus hitStimulus = bullet.GetComponentInChildren<HitStimulus>();
+                    hitStimulus.HitPoints += damageModifier;
+                    hitStimulus.ShooterName = ennemyController.Name;
 					bullet.transform.Rotate(new Vector3(0,0,angleEntreBalles*i-(angle/2)));
 				}
 				lastTimeShotInSeconds = Time.time;

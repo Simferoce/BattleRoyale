@@ -1,10 +1,12 @@
-﻿namespace Playmode.Weapon
+﻿using Playmode.Ennemy;
+
+namespace Playmode.Weapon
 {
     public class WeaponBase: WeaponController
     {
-        public override void Shoot()
+        public override void Shoot(EnnemyController ennemyController)
         {
-            base.Shoot();
+            base.Shoot(ennemyController);
         }
     }
 }

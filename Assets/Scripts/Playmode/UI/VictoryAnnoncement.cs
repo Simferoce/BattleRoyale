@@ -13,10 +13,15 @@ namespace Playmode.UI
 
         private void Awake()
         {
-            eventHandlerVictory = GameObject.FindWithTag(Tags.MainController).GetComponent<EventHandlerVictory>();
+            eventHandlerVictory = GameObject.FindWithTag(Tags.GameController).GetComponent<EventHandlerVictory>();
             text = GetComponent<Text>();
 
             eventHandlerVictory.OnEventPublished += EventHandlerVictory_OnEventPublished;
+        }
+
+        private void OnDisable()
+        {
+            eventHandlerVictory.OnEventPublished -= EventHandlerVictory_OnEventPublished;
         }
 
         private void EventHandlerVictory_OnEventPublished(VictoryData data)

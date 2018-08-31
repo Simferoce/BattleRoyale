@@ -3,18 +3,15 @@ using UnityEngine;
 
 namespace Playmode.Movement
 {
-    public abstract class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour
     {
+        private Transform rootTransform;
+
         public static readonly Vector3 Foward = Vector3.up;
         public const float Clockwise = 1f;
-        
+
         [SerializeField] protected float speed = 1f;
         [SerializeField] protected float rotateSpeed = 90f;
-
-        protected void Awake()
-        {
-            ValidateSerialisedFields();
-        }
 
         private void ValidateSerialisedFields()
         {
@@ -24,18 +21,72 @@ namespace Playmode.Movement
                 throw new ArgumentException("RotateSpeed can't be lower than 0.");
         }
 
-        public abstract void Move(Vector3 direction);
+        private void Awake()
+        {
+            ValidateSerialisedFields();
+            InitializeComponent();
+        }
 
-        public abstract void Rotate(float direction);
+        private void InitializeComponent()
+        {
+            rootTransform = transform.root;
+        }
 
-        public abstract void SetRotationToLookAt(Vector3 position);
+        public void Move(Vector3 direction)
+        {
+            rootTransform.Translate(direction.normalized * speed * Time.deltaTime);
+        }
 
-        public abstract void MoveToward(Vector3 destination);
+        public void Rotate(float direction)
+        {
+            rootTransform.Rotate(
+                Vector3.forward,
+                (direction < 0 ? rotateSpeed : -rotateSpeed) * Time.deltaTime
+            );
+        }
 
-        public abstract void Follow(Vector3 target, float distance);
+        public void MoveToward(Vector3 destination)
+        {
+            SetRotationToLookAt(destination);
 
-        public abstract void KeepDistance(Vector3 target, float distance);
+           Move(new Vector3(0, speed * Time.deltaTime,0));
+        }
 
-        public abstract void MoveBackward(Vector3 destination);
+        public void Follow(Vector3 target, float distance)
+        {
+            float distanceWithTarget = Vector2.Distance((Vector2)target, (Vector2)rootTransform.transform.position);
+            if(distanceWithTarget >= distance)
+            {
+                MoveToward(target);
+            } else
+            {
+                SetRotationToLookAt(target);
+            }
+        }
+
+        public void SetRotationToLookAt(Vector3 position)
+        {
+            Vector3 dir = position - rootTransform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            rootTransform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        }
+
+        public void KeepDistance(Vector3 target, float distance)
+        {
+            float distanceWithTarget = Vector2.Distance((Vector2)target, (Vector2)rootTransform.transform.position);
+            if(distanceWithTarget >= distance)
+            {
+                MoveToward(target);
+            } else
+            {
+                MoveBackward(target);
+            }
+        }
+
+        public void MoveBackward(Vector3 destination)
+        {
+            SetRotationToLookAt(destination);
+            Move(new Vector3(0, -speed * Time.deltaTime,0));
+        }
     }
 }

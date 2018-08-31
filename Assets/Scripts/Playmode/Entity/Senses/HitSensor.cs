@@ -2,20 +2,20 @@
 
 namespace Playmode.Entity.Senses
 {
-    public delegate void HitSensorEventHandler(int hitPoints);
+    public delegate void HitSensorEventHandler(int hitPoints, string objectThatHitName);
 
     public class HitSensor : MonoBehaviour
     {
         public event HitSensorEventHandler OnHit;
 
-        public void Hit(int hitPoints)
+        public void Hit(int hitPoints, string objectThatHitName)
         {
-            NotifyHit(hitPoints);
+            NotifyHit(hitPoints, objectThatHitName);
         }
 
-        private void NotifyHit(int hitPoints)
+        private void NotifyHit(int hitPoints, string objectThatHitName)
         {
-            if (OnHit != null) OnHit(hitPoints);
+            OnHit?.Invoke(hitPoints, objectThatHitName);
         }
     }
 }

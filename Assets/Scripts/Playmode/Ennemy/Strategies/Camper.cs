@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using Playmode.Ennemy.BodyParts;
+﻿using Playmode.Ennemy.BodyParts;
 using Playmode.Entity.Senses;
-using Playmode.Entity.Status;
+using Playmode.Entity.Status.Health;
 using Playmode.Movement;
 using Playmode.Pickable;
 using UnityEngine;
-using UnityEngine.Jobs;
-using System;
 
 namespace Playmode.Ennemy.Strategies
 {

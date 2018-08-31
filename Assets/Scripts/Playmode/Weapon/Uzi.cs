@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Playmode.Ennemy;
+using UnityEngine;
 
 namespace Playmode.Weapon
 {
@@ -7,9 +8,9 @@ namespace Playmode.Weapon
         [SerializeField] private int upgradeDamage = 2;
         [SerializeField] private float upgradeShotFireRate = 0.05f;
 
-        public override void Shoot()
+        public override void Shoot(EnnemyController ennemyController)
         {
-            base.Shoot();
+            base.Shoot(ennemyController);
         }
 
         public override void UpdatePower()

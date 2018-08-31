@@ -8,7 +8,13 @@ namespace Playmode.Ennemy.BodyParts
     public class HandController : MonoBehaviour
     {
         private WeaponController weapon;
-        
+        private EnnemyController ennemyController;
+
+        private void Awake()
+        {
+            ennemyController = transform.parent.GetComponentInChildren<EnnemyController>();
+        }
+
         public void Take(GameObject weaponObject)
         {
             if (weaponObject != null)
@@ -43,7 +49,7 @@ namespace Playmode.Ennemy.BodyParts
         {
             if (weapon != null)
             {               
-                weapon.Shoot();
+                weapon.Shoot(ennemyController);
             }
         }
     }
