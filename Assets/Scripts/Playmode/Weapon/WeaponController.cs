@@ -39,14 +39,11 @@ namespace Playmode.Weapon
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
                 HitStimulus hitStimulus = bullet.GetComponentInChildren<HitStimulus>();
                 hitStimulus.HitPoints += damageModifier;
-                hitStimulus.ShooterName = shooter.Name;
+                hitStimulus.ShooterName = shooter.transform.root.name;
                 lastTimeShotInSeconds = Time.time;
             }          
         }
 
-        public virtual void UpdatePower()
-        {
-
-        }
+        public virtual void UpdatePower(){}
     }
 }

@@ -7,11 +7,11 @@ namespace Playmode.GameControl
 {
     public class VictoryDetection : MonoBehaviour
     {
-
         private EventHandlerEnemyDeath eventHandlerEnemyDeath;
         private EventHandlerVictory eventHandlerVictory;
         private GameObject[] enemyObjects;
         private int numbOfEnemies;
+        private bool gameIsFinish = false;
 
         private void Awake()
         {
@@ -29,14 +29,15 @@ namespace Playmode.GameControl
         private void EventHandlerEnemyDeath_OnEventPublished(EnemyDeathData data)
         {
             --numbOfEnemies;
-            if (numbOfEnemies <= 1)
+            if (numbOfEnemies <= 1 && gameIsFinish == false)
             {
-                string winnerName = "";
+                gameIsFinish = true;
+                string winnerName = null;
                 for (int i = 0; i < enemyObjects.Length; ++i)
                 {
                     if (enemyObjects[i] != null)
                     {
-                        string enemyName = enemyObjects[i].GetComponentInChildren<EnnemyController>().Name;
+                        string enemyName = enemyObjects[i].name;
                         if (enemyName != data.name)
                         {
                             winnerName = enemyName;

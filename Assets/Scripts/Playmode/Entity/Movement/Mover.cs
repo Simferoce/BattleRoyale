@@ -11,6 +11,7 @@ namespace Playmode.Movement
         public const float Clockwise = 1f;
 
         [SerializeField] protected float speed = 1f;
+        public float Speed { get { return speed; } set { speed = value; } }
         [SerializeField] protected float rotateSpeed = 90f;
 
         private void ValidateSerialisedFields()

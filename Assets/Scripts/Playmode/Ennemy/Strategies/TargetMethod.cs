@@ -23,6 +23,25 @@ namespace Playmode.Ennemy.Strategies
             else
                 return null;
         }
+
+        public static EnnemyController TargetEnemyNotZombie(EnnemySensor enemySensor)
+        {
+            if (enemySensor.EnnemiesInSight.Count() > 0)
+            {
+                var enemyProvider = new LoopingEnumerator<EnnemyController>(enemySensor.EnnemiesInSight);
+                int test = enemySensor.EnnemiesInSight.Count();
+                for (var i = 0; i < test; i++)
+                {
+                    EnnemyController controller = enemyProvider.Next();
+                    if (!(controller.GetStrategyType() is ZombieStrategy))
+                    {
+                        return controller;
+                    }
+                }
+            }
+            return null;
+        }
+
         public static PickableControllerMedKit TargetMedkit(PickableSensor pickableSensor)
         {
             if (pickableSensor.PickablesInSight.Count() > 0)

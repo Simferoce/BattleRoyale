@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Playmode.Ennemy;
+using Playmode.Ennemy.Strategies;
+using System;
 using UnityEngine;
 
 namespace Playmode.Entity.Senses
 {
-    public class HitStimulus : MonoBehaviour
+    public class HitStimulusZombie : HitStimulus
     {
-        [Header("Behaviour")] [SerializeField] private int hitPoints = 10;
-        public int HitPoints { get { return hitPoints; } set { hitPoints = value;} }
-        public string ShooterName { get; set; }
+        [Header("Behaviour")] [SerializeField] private int hitPoints = 100;
 
         private void Awake()
         {
@@ -23,10 +23,9 @@ namespace Playmode.Entity.Senses
         private void OnTriggerEnter2D(Collider2D other)
         {
             HitSensor hitSensor = other.GetComponent<Entity.Senses.HitSensor>();
-            if(hitSensor != null)
+            if(hitSensor != null && !(hitSensor.transform.parent.GetComponentInChildren<EnnemyController>().GetStrategyType() is ZombieStrategy))
             {
                 hitSensor.Hit(hitPoints, ShooterName);
-                Destroy(this.transform.parent.gameObject);
             }
         }
     }

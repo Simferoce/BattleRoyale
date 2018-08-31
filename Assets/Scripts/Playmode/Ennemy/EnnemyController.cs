@@ -25,6 +25,7 @@ namespace Playmode.Ennemy
         [SerializeField] private Sprite carefulSprite;
         [SerializeField] private Sprite cowboySprite;
         [SerializeField] private Sprite camperSprite;
+        [SerializeField] private Sprite zombieSprite;
         [Header("Behaviour")] [SerializeField] private GameObject startingWeaponPrefab;
 
         private EventHandlerEnemyDeath enemyDeathChannel;
@@ -41,7 +42,6 @@ namespace Playmode.Ennemy
         private bool invincible = false;
         private string lastEnemyThatHitName = null;
 
-        public string Name { get; private set; }
         public bool isEarlySearching { get; private set; }
 
         private void Awake()
@@ -71,6 +71,8 @@ namespace Playmode.Ennemy
                 throw new ArgumentException("Type sprites must be provided. Cowboy is missing.");
             if (camperSprite == null)
                 throw new ArgumentException("Type sprites must be provided. Camper is missing.");
+            if (zombieSprite == null)
+                throw new ArgumentException("Type sprites must be provided. Zombie is missing.");
             if (startingWeaponPrefab == null)
                 throw new ArgumentException("StartingWeapon prefab must be provided.");
         }
@@ -122,7 +124,7 @@ namespace Playmode.Ennemy
         {
             body.GetComponent<SpriteRenderer>().color = color;
             sight.GetComponent<SpriteRenderer>().color = color;
-            Name = name;
+            gameObject.transform.root.name = name;
             isEarlySearching = false;
             
             switch (strategy)
@@ -138,6 +140,10 @@ namespace Playmode.Ennemy
                 case EnnemyStrategy.Camper:
                     typeSign.GetComponent<SpriteRenderer>().sprite = camperSprite;
                     this.strategy = new Camper(mover, handController, ennemySensor, pickableSensor, health);
+                    break;
+                case EnnemyStrategy.Zombie:
+                    typeSign.GetComponent<SpriteRenderer>().sprite = zombieSprite;
+                    this.strategy = new ZombieStrategy(mover, ennemySensor);
                     break;
                 default:
                     typeSign.GetComponent<SpriteRenderer>().sprite = normalSprite;
@@ -159,8 +165,11 @@ namespace Playmode.Ennemy
         {
             if(newHealth <= 0)
             {
+                if(!(strategy is ZombieStrategy))
+                {
+                    enemyDeathChannel.Publish(new EnemyDeathData(gameObject.transform.root.name, lastEnemyThatHitName));
+                }
                 NotifyOnEnemyDeath();
-                enemyDeathChannel.Publish(new EnemyDeathData(Name, lastEnemyThatHitName));
                 Destroy(this.transform.parent.gameObject);
             }
         }
@@ -200,6 +209,11 @@ namespace Playmode.Ennemy
             invincible = true;
             yield return new WaitForSeconds(timeInvincible);
             invincible = false;
+        }
+
+        public IEnnemyStrategy GetStrategyType()
+        {
+            return strategy;
         }
     }
 }

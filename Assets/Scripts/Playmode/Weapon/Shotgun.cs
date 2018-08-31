@@ -21,7 +21,7 @@ namespace Playmode.Weapon
                     GameObject bullet= Instantiate(bulletPrefab, transform.position, transform.rotation);
                     HitStimulus hitStimulus = bullet.GetComponentInChildren<HitStimulus>();
                     hitStimulus.HitPoints += damageModifier;
-                    hitStimulus.ShooterName = ennemyController.Name;
+                    hitStimulus.ShooterName = ennemyController.transform.root.name;
 					bullet.transform.Rotate(new Vector3(0,0,angleEntreBalles*i-(angle/2)));
 				}
 				lastTimeShotInSeconds = Time.time;

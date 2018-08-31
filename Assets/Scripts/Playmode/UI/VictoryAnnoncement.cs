@@ -7,7 +7,6 @@ namespace Playmode.UI
 {
     public class VictoryAnnoncement : MonoBehaviour
     {
-
         private EventHandlerVictory eventHandlerVictory;
         private Text text;
 
@@ -26,7 +25,10 @@ namespace Playmode.UI
 
         private void EventHandlerVictory_OnEventPublished(VictoryData data)
         {
-            text.text = data.WinnerName + " won.";
+            if (data.WinnerName != null)
+                text.text = data.WinnerName + " won !";
+            else
+                text.text = "Draw.";
         }
     }
 }
