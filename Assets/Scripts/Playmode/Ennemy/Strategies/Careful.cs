@@ -19,7 +19,7 @@ namespace Playmode.Ennemy.Strategies
 		private Vector2? randomSearch = null;
 		private float previousHealth;
 		private float safeDistance = 5.0f;
-		private float minVieCalculDistance = 20.0f;
+		private float minVieCalculDistance = 0.0f;
 		private float maxVieCalculdistance = 100.0f;
 		private Cowboy cowboy;
 
@@ -50,7 +50,7 @@ namespace Playmode.Ennemy.Strategies
 					}
 					else
 					{
-						TargetMethod.SearchEnemyOrPickable(mover,ref randomSearch);
+						TargetMethod.SearchEnemyOrPickable(mover, ref randomSearch);
 					}
 				}
 				else
