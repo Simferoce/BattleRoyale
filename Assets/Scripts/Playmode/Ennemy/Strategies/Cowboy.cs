@@ -29,14 +29,23 @@ namespace Playmode.Ennemy.Strategies
         public void Act()
         {
             PickableControllerWeapon targetWeapon = TargetMethod.TargetWeapon(pickableSensor);
-
+            EnnemyController targetEnemy = TargetMethod.TargetEnemy(enemySensor);
+        
             if (targetWeapon != null)
-            {
+            {                
                 mover.MoveToward((Vector2)targetWeapon.transform.position);
+                if (targetEnemy != null)
+                {
+                    handController.SetRotationHand((Vector2)targetEnemy.transform.position);
+                    handController.Use();                   
+                }
+                else
+                {
+                    handController.SetRotationHand((Vector2)targetWeapon.transform.position);
+                }
             }
             else
-            {
-                EnnemyController targetEnemy = TargetMethod.TargetEnemy(enemySensor);
+            {   
                 if(targetEnemy != null)
                 {
                     mover.Follow((Vector2)targetEnemy.transform.position, distanceFollow);
@@ -49,6 +58,7 @@ namespace Playmode.Ennemy.Strategies
                     else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
                         randomSearch = TargetMethod.Search();
                     mover.MoveToward((Vector2)randomSearch);
+                    handController.SetRotationHand((Vector2)randomSearch);
                 }
             }
         }
