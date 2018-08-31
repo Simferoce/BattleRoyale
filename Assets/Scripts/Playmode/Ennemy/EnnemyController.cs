@@ -81,7 +81,6 @@ namespace Playmode.Ennemy
         {
             health = transform.parent.GetComponentInChildren<Health>();
             mover = GetComponent<Mover>();
-
             var rootTransform = transform.root;
             ennemySensor = rootTransform.GetComponentInChildren<EnnemySensor>();
             pickableSensor = rootTransform.GetComponentInChildren<PickableSensor>();
@@ -188,18 +187,7 @@ namespace Playmode.Ennemy
         {
             OnDeathEnemy?.Invoke(this);
         }
-        public void EarlyMedpackSearch(int timeForSearch)
-        {
-            StartCoroutine(EarlyMedpackSearchRoutine(timeForSearch));
-        }
-
-        private IEnumerator EarlyMedpackSearchRoutine(int timeForSearch)
-        {
-            isEarlySearching = true;
-            yield return new WaitForSeconds(timeForSearch);
-            isEarlySearching = false;
-        }
-
+        
         public void ActivateInvincibility(int timeInvincible)
         {
             StartCoroutine(ActivateInvincibilityRoutine(timeInvincible));

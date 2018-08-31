@@ -4,7 +4,8 @@ namespace Playmode.Pickable
 {
 	public class PickableControllerInvincibility : PickableController
 	{
-
+		private int invincibilityTime = 15;
+		
 		public PickableControllerInvincibility() 
 		{
 			this.pickUpFunction = PickUpFunction;
@@ -12,7 +13,7 @@ namespace Playmode.Pickable
 
 		public void PickUpFunction(Ennemy.EnnemyController ennemy)
 		{
-			ennemy.ActivateInvincibility(15);
+			ennemy.ActivateInvincibility(invincibilityTime);
 		}
 	}
 }
