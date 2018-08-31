@@ -24,7 +24,6 @@ namespace Playmode.GameControl
         {
             enemyObjects = GameObject.FindGameObjectsWithTag(Tags.Enemy);
             numbOfEnemies = enemyObjects.Length;
-            Debug.Log(numbOfEnemies);
         }
 
         private void EventHandlerEnemyDeath_OnEventPublished(EnemyDeathData data)

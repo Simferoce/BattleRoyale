@@ -21,6 +21,7 @@ namespace Playmode.Ennemy.Strategies
         private Vector2? randomSearch = null;
         private float sensibilityProximity = 0.5f;
         private float medDistance = 1.0f;
+        private static float timeAtBeginning;
         private int secondsToPickMedpack = 10;
 
 
@@ -29,6 +30,7 @@ namespace Playmode.Ennemy.Strategies
             this.mover = mover;
             this.handController = handController;
             this.health = health;
+            timeAtBeginning = Time.time;
 
             this.enemySensor = enemySensor;
             this.pickableSensor = pickableSensor;
@@ -43,8 +45,10 @@ namespace Playmode.Ennemy.Strategies
                 pickableMedkit.OnPickUp += OnPickUp;
             }
 
-            if (pickableMedkit != null)
-            {               
+            if (Time.time - timeAtBeginning > secondsToPickMedpack)
+            {
+                if (pickableMedkit != null)
+                {               
                     if (Vector2.Distance((Vector2)pickableMedkit.transform.position,mover.transform.position) < medDistance)
                     {
                         if (health.HealthPoints>30)
@@ -69,13 +73,25 @@ namespace Playmode.Ennemy.Strategies
                     {
                         mover.MoveToward(pickableMedkit.transform.position);
                     }            
+                }
+                else
+                {
+                    PickableControllerWeapon pickableWeapon = TargetMethod.TargetWeapon(pickableSensor);
+                    if (pickableWeapon != null)
+                    {
+                        mover.MoveToward(pickableWeapon.transform.position);
+                    }
+                    else
+                    {
+                        TargetMethod.SearchEnemyOrPickable(mover, sensibilityProximity, ref randomSearch);
+                    }
+                } 
             }
             else
             {
-                PickableControllerWeapon pickableWeapon = TargetMethod.TargetWeapon(pickableSensor);
-                if (pickableWeapon != null)
+                if (pickableMedkit != null)
                 {
-                    mover.MoveToward(pickableWeapon.transform.position);
+                    mover.MoveToward(pickableMedkit.transform.position);
                 }
                 else
                 {
