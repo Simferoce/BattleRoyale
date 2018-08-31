@@ -16,7 +16,6 @@ namespace Playmode.Ennemy.Strategies
         private readonly Health health;
         private PickableControllerMedKit pickableMedkit;
         private Vector2? randomSearch = null;
-        private float sensibilityProximity = 0.5f;
         private float medDistance = 1.0f;
         private int secondsToPickMedpack = 10;
 
@@ -42,9 +41,9 @@ namespace Playmode.Ennemy.Strategies
 
             if (pickableMedkit != null)
             {               
-                    if (Vector2.Distance((Vector2)pickableMedkit.transform.position,mover.transform.position) < medDistance)
+                    if (Vector2.Distance(pickableMedkit.transform.position,mover.transform.position) < medDistance)
                     {
-                        if (health.HealthPoints>30)
+                        if (health.HealthPoints > 30)
                         {
                             EnnemyController targetEnemy = TargetMethod.TargetEnemy(enemySensor);
                             if (targetEnemy == null)
@@ -53,7 +52,7 @@ namespace Playmode.Ennemy.Strategies
                             }
                             else
                             {
-                                mover.SetRotationToLookAt((Vector2)targetEnemy.transform.position);
+                                mover.SetRotationToLookAt(targetEnemy.transform.position);
                                 handController.Use();
                             } 
                         }
@@ -76,7 +75,7 @@ namespace Playmode.Ennemy.Strategies
                 }
                 else
                 {
-                    TargetMethod.SearchEnemyOrPickable(mover, sensibilityProximity, ref randomSearch);
+                    TargetMethod.SearchEnemyOrPickable(mover, ref randomSearch);
                 }
             }
         }

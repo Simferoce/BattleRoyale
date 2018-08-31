@@ -7,7 +7,7 @@ namespace Playmode.Movement
     {
         private Transform rootTransform;
 
-        public static readonly Vector3 Foward = Vector3.up;
+        public static readonly Vector2 Foward = Vector2.up;
         public const float Clockwise = 1f;
 
         [SerializeField] protected float speed = 1f;
@@ -32,7 +32,7 @@ namespace Playmode.Movement
             rootTransform = transform.root;
         }
 
-        public void Move(Vector3 direction)
+        public void Move(Vector2 direction)
         {
             rootTransform.Translate(direction.normalized * speed * Time.deltaTime);
         }
@@ -45,16 +45,16 @@ namespace Playmode.Movement
             );
         }
 
-        public void MoveToward(Vector3 destination)
+        public void MoveToward(Vector2 destination)
         {
             SetRotationToLookAt(destination);
 
-           Move(new Vector3(0, speed * Time.deltaTime,0));
+           Move(new Vector2(0, speed * Time.deltaTime));
         }
 
-        public void Follow(Vector3 target, float distance)
+        public void Follow(Vector2 target, float distance)
         {
-            float distanceWithTarget = Vector2.Distance((Vector2)target, (Vector2)rootTransform.transform.position);
+            float distanceWithTarget = Vector2.Distance(target, rootTransform.transform.position);
             if(distanceWithTarget >= distance)
             {
                 MoveToward(target);
@@ -64,16 +64,16 @@ namespace Playmode.Movement
             }
         }
 
-        public void SetRotationToLookAt(Vector3 position)
+        public void SetRotationToLookAt(Vector2 position)
         {
-            Vector3 dir = position - rootTransform.position;
+            Vector2 dir = position - (Vector2)rootTransform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             rootTransform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
 
-        public void KeepDistance(Vector3 target, float distance)
+        public void KeepDistance(Vector2 target, float distance)
         {
-            float distanceWithTarget = Vector2.Distance((Vector2)target, (Vector2)rootTransform.transform.position);
+            float distanceWithTarget = Vector2.Distance(target, rootTransform.transform.position);
             if(distanceWithTarget >= distance)
             {
                 MoveToward(target);
@@ -83,10 +83,10 @@ namespace Playmode.Movement
             }
         }
 
-        public void MoveBackward(Vector3 destination)
+        public void MoveBackward(Vector2 destination)
         {
             SetRotationToLookAt(destination);
-            Move(new Vector3(0, -speed * Time.deltaTime,0));
+            Move(new Vector2(0, -speed * Time.deltaTime));
         }
     }
 }

@@ -32,14 +32,14 @@ namespace Playmode.Weapon
             lastTimeShotInSeconds = 0;
         }
 
-        public virtual void Shoot(EnnemyController ennemyController)
+        public virtual void Shoot(EnnemyController shooter)
         {           
             if (CanShoot)
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
                 HitStimulus hitStimulus = bullet.GetComponentInChildren<HitStimulus>();
                 hitStimulus.HitPoints += damageModifier;
-                hitStimulus.ShooterName = ennemyController.Name;
+                hitStimulus.ShooterName = shooter.Name;
                 lastTimeShotInSeconds = Time.time;
             }          
         }

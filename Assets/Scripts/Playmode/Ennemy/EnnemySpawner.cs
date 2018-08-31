@@ -1,6 +1,5 @@
 ﻿using System;
 using Playmode.Ennemy.Strategies;
-using Playmode.Util;
 using Playmode.Util.Collections;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace Playmode.Ennemy
             Color.magenta, Color.red, Color.yellow, new Color(255, 125, 0, 255)
         };
 
-        private static readonly String[] DefaultNames =
+        private static readonly string[] DefaultNames =
         {
             "Jonnhy", "Bob", "Leo", "Mike", "Pierre", "Victor", "Vladimir", "Donald", "Yannick"
         };
@@ -29,7 +28,7 @@ namespace Playmode.Ennemy
 
         [SerializeField] private GameObject ennemyPrefab;
         [SerializeField] private Color[] colors = DefaultColors;
-        [SerializeField] private String[] names = DefaultNames;
+        [SerializeField] private string[] names = DefaultNames;
 
         private void Awake()
         {

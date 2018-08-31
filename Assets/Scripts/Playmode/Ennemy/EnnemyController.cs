@@ -28,9 +28,8 @@ namespace Playmode.Ennemy
         [SerializeField] private Sprite camperSprite;
         [Header("Behaviour")] [SerializeField] private GameObject startingWeaponPrefab;
 
-
-        private IEnnemyStrategy strategy;
         private EventHandlerEnemyDeath enemyDeathChannel;
+
         private Health health;
         private Mover mover;
         private Destroyer destroyer;
@@ -38,11 +37,13 @@ namespace Playmode.Ennemy
         private PickableSensor pickableSensor;
         private HitSensor hitSensor;
         private HandController handController;
+
+        private IEnnemyStrategy strategy;
+
         private bool invincible = false;
         private string lastEnemyThatHitName = null;
 
         public string Name { get; private set; }
-
         public bool isEarlySearching { get; private set; }
 
         private void Awake()

@@ -11,7 +11,6 @@ namespace Playmode.Ennemy.Strategies
         private readonly HandController handController;
         private readonly EnnemySensor enemySensor;
         private Vector2? randomSearch = null;
-        private float sensibilityProximity = 0.5f;
         private readonly float distanceFollow = 1f;
 
 
@@ -34,11 +33,7 @@ namespace Playmode.Ennemy.Strategies
             }
             else
             {
-                if (randomSearch == null)
-                    randomSearch = TargetMethod.Search();
-                else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
-                    randomSearch = TargetMethod.Search();
-                mover.MoveToward((Vector2)randomSearch);
+                TargetMethod.SearchEnemyOrPickable(mover, ref randomSearch);
             }
         }
     }
