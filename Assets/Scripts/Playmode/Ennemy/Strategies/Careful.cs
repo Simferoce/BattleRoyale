@@ -1,6 +1,6 @@
 ﻿using Playmode.Ennemy.BodyParts;
 using Playmode.Entity.Senses;
-using Playmode.Entity.Status;
+using Playmode.Entity.Status.Health;
 using Playmode.Movement;
 using Playmode.Pickable;
 using UnityEngine;
@@ -13,12 +13,11 @@ namespace Playmode.Ennemy.Strategies
 		private readonly HandController handController;
 		private readonly EnnemySensor enemySensor;
 		private readonly PickableSensor pickableSensor;
-		private PickableControllerWeapon pickableWeapon;
-		private PickableControllerMedKit pickableMedkit;
+		private PickableControllerMedKit pickableMedkitTargeted;
 		private readonly Health health;
+
 		private Vector2? randomSearch = null;
-		private float sensibilityProximity = 0.5f;
-		private float previousHealth = 100.0f;
+		private float previousHealth;
 		private float safeDistance = 5.0f;
 		private float minVieCalculDistance = 20.0f;
 		private float maxVieCalculdistance = 100.0f;
@@ -29,7 +28,8 @@ namespace Playmode.Ennemy.Strategies
 			this.mover = mover;
 			this.handController = handController;
 			this.health = health;
-			cowboy= new Cowboy(mover, handController, enemySensor, pickableSensor);
+            previousHealth = health.HealthPoints;
+            cowboy = new Cowboy(mover, handController, enemySensor, pickableSensor);
 
 			this.enemySensor = enemySensor;
 			this.pickableSensor = pickableSensor;
@@ -50,7 +50,7 @@ namespace Playmode.Ennemy.Strategies
 					}
 					else
 					{
-						TargetMethod.SearchEnemyOrPickable(mover, sensibilityProximity,ref randomSearch);
+						TargetMethod.SearchEnemyOrPickable(mover,ref randomSearch);
 					}
 				}
 				else
@@ -70,7 +70,7 @@ namespace Playmode.Ennemy.Strategies
 						}
 						else
 						{
-							TargetMethod.SearchEnemyOrPickable(mover, sensibilityProximity, ref randomSearch);
+							TargetMethod.SearchEnemyOrPickable(mover, ref randomSearch);
 						}
 					}
 				}
@@ -83,8 +83,8 @@ namespace Playmode.Ennemy.Strategies
 
 		private void OnPickUp(PickableController controller)
 		{
-			pickableMedkit.OnPickUp -= OnPickUp;
-			pickableMedkit = null;
+			pickableMedkitTargeted.OnPickUp -= OnPickUp;
+			pickableMedkitTargeted = null;
 		}
 
 		private void ConfigureDistance()

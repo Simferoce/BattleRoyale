@@ -2,10 +2,11 @@
 using System.Collections;
 using Playmode.Ennemy.BodyParts;
 using Playmode.Ennemy.Strategies;
-using Playmode.Entity.Destruction;
 using Playmode.Entity.Senses;
-using Playmode.Entity.Status;
+using Playmode.Entity.Status.Health;
+using Playmode.Event;
 using Playmode.Movement;
+using Playmode.Util.Values;
 using UnityEngine;
 
 namespace Playmode.Ennemy
@@ -14,6 +15,8 @@ namespace Playmode.Ennemy
 
     public class EnnemyController : MonoBehaviour
     {
+        public event DeathEventHandler OnDeathEnemy;
+
         [Header("Body Parts")] [SerializeField] private GameObject body;
         [SerializeField] private GameObject hand;
         [SerializeField] private GameObject sight;
@@ -24,26 +27,28 @@ namespace Playmode.Ennemy
         [SerializeField] private Sprite camperSprite;
         [Header("Behaviour")] [SerializeField] private GameObject startingWeaponPrefab;
 
+        private EventHandlerEnemyDeath enemyDeathChannel;
+
         private Health health;
         private Mover mover;
-        private Destroyer destroyer;
         private EnnemySensor ennemySensor;
         private PickableSensor pickableSensor;
         private HitSensor hitSensor;
         private HandController handController;
-        private bool invincible = false;
-
-        public string Name { get; private set; }
-
-        public bool isEarlySearching { get; private set; }
 
         private IEnnemyStrategy strategy;
 
-        public event DeathEventHandler OnDeathEnemy;
+        private bool invincible = false;
+        private string lastEnemyThatHitName = null;
+
+        public string Name { get; private set; }
+        public bool isEarlySearching { get; private set; }
 
         private void Awake()
         {
             ValidateSerialisedFields();
+            enemyDeathChannel = GameObject.FindWithTag(Tags.GameController).GetComponent<EventHandlerEnemyDeath>();
+
             InitializeComponent();
             CreateStartingWeapon();
         }
@@ -72,9 +77,8 @@ namespace Playmode.Ennemy
 
         private void InitializeComponent()
         {
-            health = GetComponent<Health>();
-            mover = GetComponent<RootMover>();
-            destroyer = GetComponent<RootDestroyer>();
+            health = transform.parent.GetComponentInChildren<Health>();
+            mover = GetComponent<Mover>();
 
             var rootTransform = transform.root;
             ennemySensor = rootTransform.GetComponentInChildren<EnnemySensor>();
@@ -94,12 +98,8 @@ namespace Playmode.Ennemy
 
         private void OnEnable()
         {
-            ennemySensor.OnEnnemySeen += OnEnnemySeen;
-            ennemySensor.OnEnnemySightLost += OnEnnemySightLost;
-            pickableSensor.OnPickableSeen += OnPickableSeen;
-            pickableSensor.OnPickableSightLost += OnPickableSightLost;
             hitSensor.OnHit += OnHit;
-            health.OnDeath += OnDeath;
+            health.OnHealthChange += OnHealthChange;
         }
 
         private void Update()
@@ -107,18 +107,15 @@ namespace Playmode.Ennemy
             if(strategy == null)
             {
                 Configure(EnnemyStrategy.Normal, Color.black, "Test");
+                Debug.Log("Created test enemy");
             }
             strategy.Act();
         }
 
         private void OnDisable()
         {
-            ennemySensor.OnEnnemySeen -= OnEnnemySeen;
-            ennemySensor.OnEnnemySightLost -= OnEnnemySightLost;
-            pickableSensor.OnPickableSeen -= OnPickableSeen;
-            pickableSensor.OnPickableSightLost -= OnPickableSightLost;
             hitSensor.OnHit -= OnHit;
-            health.OnDeath -= OnDeath;
+            health.OnHealthChange -= OnHealthChange;
         }
 
         public void Configure(EnnemyStrategy strategy, Color color, string name)
@@ -149,41 +146,23 @@ namespace Playmode.Ennemy
             }
         }
 
-        private void OnHit(int hitPoints)
+        private void OnHit(int hitPoints, string enemyThatHitName)
         {
             if (invincible == false)
             {
-                //Debug.Log("OW, I'm hurt! I'm really much hurt!!!");
+                lastEnemyThatHitName = enemyThatHitName;
                 health.Hit(hitPoints);
             }
-            
         }
 
-        private void OnDeath()
+        private void OnHealthChange(int newHealth)
         {
-            //Debug.Log("Yaaaaarggg....!! I died....GG.");
-            NotifyOnEnemyDeath();
-            destroyer.Destroy();
-        }
-
-        private void OnEnnemySeen(EnnemyController ennemy)
-        {
-            //Debug.Log("I've seen an ennemy!! Ya so dead noob!!!");
-        }
-
-        private void OnEnnemySightLost(EnnemyController ennemy)
-        {
-            //Debug.Log("I've lost sight of an ennemy...Yikes!!!");
-        }
-
-        private void OnPickableSeen(Pickable.PickableController pickable)
-        {
-            //Debug.Log("Hummm pickable spotted");
-        }
-
-        private void OnPickableSightLost(Pickable.PickableController pickable)
-        {
-            //Debug.Log("Where the pickable went ?");
+            if(newHealth <= 0)
+            {
+                NotifyOnEnemyDeath();
+                enemyDeathChannel.Publish(new EnemyDeathData(Name, lastEnemyThatHitName));
+                Destroy(this.transform.parent.gameObject);
+            }
         }
 
         public void Take(GameObject gameObject)

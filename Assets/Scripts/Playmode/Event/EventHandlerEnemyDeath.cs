@@ -12,10 +12,12 @@ namespace Playmode.Event
     public struct EnemyDeathData
     {
         public string name;
+        public string killerName;
 
-        public EnemyDeathData(string name)
+        public EnemyDeathData(string name, string killerName)
         {
             this.name = name;
+            this.killerName = killerName;
         }
     }
 

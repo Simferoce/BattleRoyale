@@ -15,9 +15,9 @@ namespace Playmode.GameControl
 
         private void Awake()
         {
-            eventHandlerEnemyDeath = GameObject.FindWithTag(Tags.MainController).GetComponent<EventHandlerEnemyDeath>();
+            eventHandlerEnemyDeath = GameObject.FindWithTag(Tags.GameController).GetComponent<EventHandlerEnemyDeath>();
             eventHandlerEnemyDeath.OnEventPublished += EventHandlerEnemyDeath_OnEventPublished;
-            eventHandlerVictory = GameObject.FindWithTag(Tags.MainController).GetComponent<EventHandlerVictory>();
+            eventHandlerVictory = GameObject.FindWithTag(Tags.GameController).GetComponent<EventHandlerVictory>();
         }
 
         private void Start()
@@ -44,7 +44,6 @@ namespace Playmode.GameControl
                         }
                     }
                 }
-                Debug.Log(enemyObjects);
                 eventHandlerVictory.Publish(new VictoryData(winnerName));
             }
         }

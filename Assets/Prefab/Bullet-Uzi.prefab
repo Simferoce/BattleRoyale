@@ -54,7 +54,6 @@ GameObject:
   - component: {fileID: 4731109415890014}
   - component: {fileID: 114743693313930308}
   - component: {fileID: 114564278053168946}
-  - component: {fileID: 114823349749228828}
   m_Layer: 0
   m_Name: Control
   m_TagString: Untagged
@@ -152,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c2609897114b288abdbaebcc92f181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeSpanInSeconds: 2
 --- !u!114 &114751053403438238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,17 +163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 7
---- !u!114 &114823349749228828
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1626434724050814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 896131d0d06d48d08bcbf4d0a7e56fc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212972083067388752
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -14,6 +14,8 @@ namespace Playmode.Ennemy.Strategies
 {
     public static class TargetMethod
     {
+        private static float proximitySensibility = 0.5f;
+
         public static EnnemyController TargetEnemy(EnnemySensor enemySensor)
         {
             if (enemySensor.EnnemiesInSight.Count() > 0)
@@ -63,12 +65,12 @@ namespace Playmode.Ennemy.Strategies
             return new Vector2(UnityEngine.Random.Range(-CameraInfo.Width / 2, CameraInfo.Width / 2),
                 UnityEngine.Random.Range(-CameraInfo.Height / 2, CameraInfo.Height / 2));
         }
-        public static void SearchEnemyOrPickable(Mover mover, float sensibilityProximity, ref Vector2? randomSearch)
+        public static void SearchEnemyOrPickable(Mover mover, ref Vector2? randomSearch)
         {
             if (randomSearch == null)
-                randomSearch = TargetMethod.Search();
-            else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
-                randomSearch = TargetMethod.Search();
+                randomSearch = Search();
+            else if ((randomSearch - mover.transform.position).Value.magnitude < proximitySensibility)
+                randomSearch = Search();
             mover.MoveToward((Vector2) randomSearch);
         }
     } 

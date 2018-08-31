@@ -14,7 +14,6 @@ namespace Playmode.Ennemy.Strategies
         private readonly PickableSensor pickableSensor;
         private readonly float distanceFollow = 1f;
         private Vector2? randomSearch = null;
-        private float sensibilityProximity = 0.5f;
 
 
         public Cowboy(Mover mover, HandController handController, EnnemySensor enemySensor, PickableSensor pickableSensor)
@@ -33,7 +32,7 @@ namespace Playmode.Ennemy.Strategies
         
             if (targetWeapon != null)
             {                
-                mover.MoveToward((Vector2)targetWeapon.transform.position);
+                mover.MoveToward(targetWeapon.transform.position);
                 if (targetEnemy != null)
                 {
                     handController.SetRotationHand((Vector2)targetEnemy.transform.position);
@@ -48,16 +47,12 @@ namespace Playmode.Ennemy.Strategies
             {   
                 if(targetEnemy != null)
                 {
-                    mover.Follow((Vector2)targetEnemy.transform.position, distanceFollow);
+                    mover.Follow(targetEnemy.transform.position, distanceFollow);
                     handController.Use();
                 } 
                 else
                 {
-                    if (randomSearch == null)
-                        randomSearch = TargetMethod.Search();
-                    else if ((randomSearch - mover.transform.position).Value.magnitude < sensibilityProximity)
-                        randomSearch = TargetMethod.Search();
-                    mover.MoveToward((Vector2)randomSearch);
+                    TargetMethod.SearchEnemyOrPickable(mover, ref randomSearch);
                     handController.SetRotationHand((Vector2)randomSearch);
                 }
             }

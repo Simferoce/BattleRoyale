@@ -1,4 +1,5 @@
-﻿using Playmode.Entity.Senses;
+﻿using Playmode.Ennemy;
+using Playmode.Entity.Senses;
 using System;
 using UnityEngine;
 
@@ -31,12 +32,14 @@ namespace Playmode.Weapon
             lastTimeShotInSeconds = 0;
         }
 
-        public virtual void Shoot()
+        public virtual void Shoot(EnnemyController shooter)
         {           
             if (CanShoot)
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-                bullet.GetComponentInChildren<HitStimulus>().HitPoints += damageModifier;
+                HitStimulus hitStimulus = bullet.GetComponentInChildren<HitStimulus>();
+                hitStimulus.HitPoints += damageModifier;
+                hitStimulus.ShooterName = shooter.Name;
                 lastTimeShotInSeconds = Time.time;
             }          
         }

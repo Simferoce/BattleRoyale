@@ -7,6 +7,7 @@ namespace Playmode.Entity.Senses
     {
         [Header("Behaviour")] [SerializeField] private int hitPoints = 10;
         public int HitPoints { get { return hitPoints; } set { hitPoints = value;} }
+        public string ShooterName { get; set; }
 
         private void Awake()
         {
@@ -21,7 +22,14 @@ namespace Playmode.Entity.Senses
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            other.GetComponent<Entity.Senses.HitSensor>()?.Hit(hitPoints);
+            HitSensor hitSensor = other.GetComponent<Entity.Senses.HitSensor>();
+            if(hitSensor != null)
+            {
+                hitSensor.Hit(hitPoints, ShooterName);
+                Destroy(this.transform.parent.gameObject);
+            }
+
+
         }
     }
 }

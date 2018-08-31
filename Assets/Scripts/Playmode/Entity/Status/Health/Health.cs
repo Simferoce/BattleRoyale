@@ -1,39 +1,33 @@
-﻿using Playmode.Util.Values;
-using System;
+﻿using System;
 using UnityEngine;
-using Playmode.Event;
-using Playmode.Ennemy;
 
-namespace Playmode.Entity.Status
+namespace Playmode.Entity.Status.Health
 {
-    public delegate void HealthEventHandler();
+    public delegate void HealthChangeEventHandler(int newHealth);
 
     public class Health : MonoBehaviour
     {
         [SerializeField] private int healthPoints = 100;
 
-        private EventHandlerEnemyDeath enemyDeathChannel;
-        private EnnemyController ennemyController;
-
-        public event HealthEventHandler OnDeath;
+        public event HealthChangeEventHandler OnHealthChange;
 
         public int HealthPoints
         {
             get { return healthPoints; }
             private set
             {
+                int temp = healthPoints;
+                
                 healthPoints = value < 0 ? 0 : value;
 
-                if (healthPoints <= 0) NotifyDeath();
+                if (temp != value)
+                    NotifyHealthChange();
             }
         }
 
         private void Awake()
         {
             ValidateSerialisedFields();
-
-            enemyDeathChannel = GameObject.FindWithTag(Tags.MainController).GetComponent<EventHandlerEnemyDeath>();
-            ennemyController = GetComponent<EnnemyController>();
         }
 
         private void ValidateSerialisedFields()
@@ -52,10 +46,9 @@ namespace Playmode.Entity.Status
             HealthPoints += healthPoints;
         }
 
-        private void NotifyDeath()
+        private void NotifyHealthChange()
         {
-            enemyDeathChannel.Publish(new EnemyDeathData(ennemyController.Name));
-            OnDeath?.Invoke();
+            OnHealthChange?.Invoke(healthPoints);
         }
     }
 }
