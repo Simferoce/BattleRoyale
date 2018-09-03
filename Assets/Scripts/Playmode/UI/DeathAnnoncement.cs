@@ -31,13 +31,9 @@ namespace Playmode.UI
         private void EventHandlerEnemyDeath_OnEventPublished(EnemyDeathData data)
         {
             if(text.text == "")
-            {
                 ShowText(data);
-            }
             else
-            {
                 textBuffer.Add(data);
-            }
         }
 
         private IEnumerator ClearText()

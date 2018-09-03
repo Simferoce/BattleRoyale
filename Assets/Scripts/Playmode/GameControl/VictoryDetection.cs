@@ -1,5 +1,4 @@
-﻿using Playmode.Ennemy;
-using Playmode.Event;
+﻿using Playmode.Event;
 using Playmode.Util.Values;
 using UnityEngine;
 

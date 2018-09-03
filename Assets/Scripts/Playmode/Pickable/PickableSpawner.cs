@@ -4,9 +4,9 @@ namespace Playmode.Pickable
 {
     public class PickableSpawner : MonoBehaviour
     {
-        public void Spawn(GameObject pickable)
+        public GameObject Spawn(GameObject pickable)
         {
-            Instantiate(pickable, this.transform.position, Quaternion.identity);
+            return Instantiate(pickable, this.transform.position, Quaternion.identity);
         }
     }
 }

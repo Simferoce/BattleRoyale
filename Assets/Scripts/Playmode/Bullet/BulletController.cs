@@ -1,5 +1,4 @@
-﻿using System;
-using Playmode.Movement;
+﻿using Playmode.Movement;
 using UnityEngine;
 
 namespace Playmode.Bullet

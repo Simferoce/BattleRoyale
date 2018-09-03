@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4483935078510204}
   - component: {fileID: 114330996419681576}
-  - component: {fileID: 114472922915503580}
+  - component: {fileID: 114875651970768720}
   m_Layer: 0
   m_Name: Control
   m_TagString: Untagged
@@ -138,19 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c2609897114b288abdbaebcc92f181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114472922915503580
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1868760311528720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783612ad5ea948a590334124318837b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 50
-  rotateSpeed: 90
 --- !u!114 &114834277128729552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,6 +150,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 20
+--- !u!114 &114875651970768720
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868760311528720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf3221db0a6417bb514b57e3c5c5818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  rotateSpeed: 90
 --- !u!212 &212727821276229070
 SpriteRenderer:
   m_ObjectHideFlags: 1

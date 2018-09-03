@@ -1,10 +1,6 @@
 ﻿using Playmode.Entity.Senses;
 using Playmode.Util.Values;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Playmode.Pickable;
 using UnityEngine;
 using Playmode.Movement;

@@ -18,7 +18,9 @@ namespace Playmode.Pickable
                 for(int i = 0; i < spawners.Length; ++i)
                 {
                     spawners[i] = Instantiate(spawner,
-                        new Vector3(Random.Range(-CameraInfo.Width/2, CameraInfo.Width/2), Random.Range(-CameraInfo.Height/2, CameraInfo.Height/2)),
+                        new Vector3(
+                            Random.Range(-CameraInfo.Width/2, CameraInfo.Width/2), 
+                            Random.Range(-CameraInfo.Height/2, CameraInfo.Height/2)),
                         Quaternion.identity);
 
                     SpawnPickable(spawners[i].GetComponent<PickableSpawner>());
@@ -28,7 +30,8 @@ namespace Playmode.Pickable
 
         private void SpawnPickable(PickableSpawner pickableSpawner)
         {
-            pickableSpawner.Spawn(pickables[Random.Range(0, pickables.Length)]);
+            GameObject pickable = pickableSpawner.Spawn(pickables[Random.Range(0, pickables.Length)]);
+            pickable.transform.parent = pickableSpawner.transform;
         }
     }
 }

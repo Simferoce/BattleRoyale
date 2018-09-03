@@ -1,4 +1,5 @@
-﻿using Playmode.Entity.Senses;
+﻿using Playmode.Ennemy.Strategies;
+using Playmode.Entity.Senses;
 using UnityEngine;
 
 namespace Playmode.Pickable
@@ -25,9 +26,12 @@ namespace Playmode.Pickable
 
         private void EnemySensor_OnEnnemySeen(Ennemy.EnnemyController ennemy)
         {
-            pickUpFunction?.Invoke(ennemy);
-            NotifyOnPickUp();
-            Destroy(this.gameObject);
+            if (!(ennemy.GetStrategyType() is ZombieStrategy))
+            {
+                pickUpFunction?.Invoke(ennemy);
+                NotifyOnPickUp();
+                Destroy(this.gameObject);
+            }
         }
 
         private void NotifyOnPickUp()
