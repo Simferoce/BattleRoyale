@@ -9,6 +9,11 @@ namespace Playmode.Ennemy.Strategies
 {
 	class Careful : IEnnemyStrategy
 	{
+		private const float MIN_VIE_CALCUL_DISTANCE = 0.0f;
+		private const float MAX_VIE_CALCUL_DISTANCE = 100.0f;
+		private const int HEALTH_LIMIT_TO_BE_COWBOY = 70;
+		private const int HEALTH_LIMIT_TO_SEARCH_MEDKIT = 40;
+		
 		private readonly Mover mover;
 		private readonly HandController handController;
 		private readonly EnnemySensor enemySensor;
@@ -19,8 +24,7 @@ namespace Playmode.Ennemy.Strategies
 		private Vector2? randomSearch = null;
 		private float previousHealth;
 		private float safeDistance = 5.0f;
-		private float minVieCalculDistance = 0.0f;
-		private float maxVieCalculdistance = 100.0f;
+		
 		private Cowboy cowboy;
 
 		public Careful(Mover mover, HandController handController, EnnemySensor enemySensor, PickableSensor pickableSensor, Health health)
@@ -38,9 +42,9 @@ namespace Playmode.Ennemy.Strategies
 		public void Act()
 		{
 			ConfigureDistance();
-			if (health.HealthPoints < 70)
+			if (health.HealthPoints < HEALTH_LIMIT_TO_BE_COWBOY)
 			{
-				if (health.HealthPoints < 40)
+				if (health.HealthPoints < HEALTH_LIMIT_TO_SEARCH_MEDKIT)
 				{
 					PickableControllerMedKit medkit = TargetMethod.TargetMedkit(pickableSensor);
 
@@ -89,7 +93,7 @@ namespace Playmode.Ennemy.Strategies
 
 		private void ConfigureDistance()
 		{
-			if (health.HealthPoints <= maxVieCalculdistance && health.HealthPoints >= minVieCalculDistance)
+			if (health.HealthPoints <= MAX_VIE_CALCUL_DISTANCE && health.HealthPoints >= MIN_VIE_CALCUL_DISTANCE)
 			{
 				float differenceDistance = previousHealth - health.HealthPoints;
 				safeDistance += (differenceDistance * 0.25f);

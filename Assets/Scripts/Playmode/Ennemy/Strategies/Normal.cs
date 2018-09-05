@@ -18,7 +18,6 @@ namespace Playmode.Ennemy.Strategies
         {
             this.mover = mover;
             this.handController = handController;
-
             this.enemySensor = enemySensor;
         }
 

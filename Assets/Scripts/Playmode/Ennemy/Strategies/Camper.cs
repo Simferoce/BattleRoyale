@@ -9,17 +9,17 @@ namespace Playmode.Ennemy.Strategies
 {
     public class Camper : IEnnemyStrategy
     {
+        private const int SECONDS_TO_PICK_MEDKIT = 10;
+        private const float MEDKIT_DISTANCE = 1.0f;
+        
         private readonly Mover mover;
         private readonly HandController handController;
         private readonly EnnemySensor enemySensor;
         private readonly PickableSensor pickableSensor;
         private readonly Health health;
         private PickableControllerMedKit pickableMedkit;
-        private Vector2? randomSearch = null;
-        private float medDistance = 1.0f;
-        private static float timeAtBeginning;
-        private int secondsToPickMedpack = 10;
-
+        private Vector2? randomSearch = null;      
+        private static float timeAtBeginning;        
 
         public Camper(Mover mover, HandController handController, EnnemySensor enemySensor, PickableSensor pickableSensor, Health health)
         {
@@ -41,11 +41,11 @@ namespace Playmode.Ennemy.Strategies
                 pickableMedkit.OnPickUp += OnPickUp;
             }
 
-            if (Time.time - timeAtBeginning > secondsToPickMedpack)
+            if (Time.time - timeAtBeginning > SECONDS_TO_PICK_MEDKIT)
             {
                 if (pickableMedkit != null)
                 {               
-                    if (Vector2.Distance(pickableMedkit.transform.position,mover.transform.position) < medDistance)
+                    if (Vector2.Distance(pickableMedkit.transform.position,mover.transform.position) < MEDKIT_DISTANCE)
                     {
                         if (health.HealthPoints > 30)
                         {

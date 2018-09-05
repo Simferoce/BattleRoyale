@@ -8,7 +8,7 @@ namespace Playmode.Movement
         private Transform rootTransform;
 
         public static readonly Vector2 Foward = Vector2.up;
-        public const float Clockwise = 1f;
+        public const float CLOCKWISE = 1f;
 
         [SerializeField] protected float speed = 1f;
         public float Speed { get { return speed; } set { speed = value; } }
