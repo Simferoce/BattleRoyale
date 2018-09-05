@@ -203,7 +203,7 @@ MonoBehaviour:
   - {fileID: 1594273403483344, guid: 51a99153b3b2f0641970c466dd930a8a, type: 2}
   - {fileID: 1594273403483344, guid: ef4a12d7f9f31e34bb4125156d0f27cb, type: 2}
   spawner: {fileID: 1261953868439324, guid: 0568e962356d6c741ad7cf0064c8f786, type: 2}
-  numbOfSpawners: 100
+  numbOfSpawners: 35
 --- !u!4 &707874997
 Transform:
   m_ObjectHideFlags: 0
