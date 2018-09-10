@@ -8,10 +8,17 @@ using Playmode.Util.Collections;
 
 namespace Playmode.Ennemy.Strategies
 {
+    //BEN_CORRECTION : Je doute de l'utilité de cette classe. Les fonctions on une utilisé, certes, mais je pense qu'elles
+    //                 devraient être dans les stratégies (une classe de base à toutes les stratégies).
+    
     public static class TargetMethod
     {
         private static float proximitySensibility = 0.5f;
 
+        //BEN_CORRECTION : Pour continuer mon commentaire plus haut ...
+        //
+        //                 Cette fonction aurait du être directement dans "EnnemySensor".
+        //                 Elle aurait plus s'appeler "GetFirstEnnemyTarget".
         public static EnnemyController TargetEnemy(EnnemySensor enemySensor)
         {
             if (enemySensor.EnnemiesInSight.Count() > 0)

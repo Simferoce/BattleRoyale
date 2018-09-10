@@ -9,6 +9,8 @@ namespace Playmode.Ennemy.Strategies
 {
     public class Camper : IEnnemyStrategy
     {
+        //BEN_REVIEW : Ces constantes auraient pu être envoyés à la construction à la place. Cela vous aurait permis de
+        //             le configurer plus facilement.
         private const int SECONDS_TO_PICK_MEDKIT = 10;
         private const float MEDKIT_DISTANCE = 1.0f;
         
@@ -41,13 +43,16 @@ namespace Playmode.Ennemy.Strategies
                 pickableMedkit.OnPickUp += OnPickUp;
             }
 
+            //BEN_INFO : Comportement bonus.
             if (Time.time - timeAtBeginning > SECONDS_TO_PICK_MEDKIT)
             {
+                //BEN_CORRECTION : La méthode Act est beaucoup trop complexe. Vous auriez pu la diviser en sous méthodes assez
+                //                 facilement. Me voir si vous désirez savoir comment.
                 if (pickableMedkit != null)
                 {               
                     if (Vector2.Distance(pickableMedkit.transform.position,mover.transform.position) < MEDKIT_DISTANCE)
                     {
-                        if (health.HealthPoints > 30)
+                        if (health.HealthPoints > 30) //BEN_CORRECTION : Chiffre magique.
                         {
                             EnnemyController targetEnemy = TargetMethod.TargetEnemy(enemySensor);
                             if (targetEnemy == null)
@@ -79,6 +84,8 @@ namespace Playmode.Ennemy.Strategies
                     }
                     else
                     {
+                        //BEN_CORRECTION : Je comprends pas vraiment pouquoi vous avez mis ce bout de code dans une classe statique
+                        //                 et non pas dans une classe de base, auquel toutes les autres stratégies auraient hérité.
                         TargetMethod.SearchEnemyOrPickable(mover, ref randomSearch);
                     }
                 } 

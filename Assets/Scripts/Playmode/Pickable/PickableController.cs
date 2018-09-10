@@ -9,6 +9,7 @@ namespace Playmode.Pickable
     public class PickableController : MonoBehaviour
     {
         protected EnnemySensor enemySensor;
+        //BEN_CORRECTION : Ne savez-vous pas ce qu'est qu'une classe abstraite ? C'est plutôt grâve comme erreur....
         protected EnnemySensorEventHandler pickUpFunction;
 
         public event PickUpEventHandler OnPickUp;

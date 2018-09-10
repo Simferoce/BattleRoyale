@@ -26,7 +26,10 @@ namespace Playmode.Entity.Senses
             if(hitSensor != null)
             {
                 hitSensor.Hit(hitPoints, ShooterName);
-                Destroy(this.transform.parent.gameObject);
+                //BEN_CORRECTION : Responsabilité du BulletController.
+                //
+                //                 
+                Destroy(this.transform.parent.gameObject); 
             }
         }
     }

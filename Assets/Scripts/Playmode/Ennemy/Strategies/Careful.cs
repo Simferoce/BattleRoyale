@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Playmode.Ennemy.Strategies
 {
+	//BEN_CORRECTION : J'ai commencé par corriger Camper. Certains de mes commentaires dans Camper s'appliquent ici aussi.
+	//				   Je n'ai juste pas dupliqué mes commentaires pour rien.
+	
 	class Careful : IEnnemyStrategy
 	{
 		private const float MIN_VIE_CALCUL_DISTANCE = 0.0f;
@@ -42,7 +45,9 @@ namespace Playmode.Ennemy.Strategies
 		public void Act()
 		{
 			ConfigureDistance();
-			if (health.HealthPoints < HEALTH_LIMIT_TO_BE_COWBOY)
+			//BEN_REVIEW : Transformez ces conditions, longues à lire, en petites méthodes qui disent en quoi consiste la condition.
+			//			   J'ai fait celle ci, comparez avec celle du dessous.
+			if (!CanActAsACowboy())
 			{
 				if (health.HealthPoints < HEALTH_LIMIT_TO_SEARCH_MEDKIT)
 				{
@@ -85,12 +90,23 @@ namespace Playmode.Ennemy.Strategies
 			}
 		}
 
+		private bool CanActAsACowboy()
+		{
+			return health.HealthPoints >= HEALTH_LIMIT_TO_BE_COWBOY;
+		}
+
+		//BEN_CORRECTION : Inutilisé.
 		private void OnPickUp(PickableController controller)
 		{
 			pickableMedkitTargeted.OnPickUp -= OnPickUp;
 			pickableMedkitTargeted = null;
 		}
 
+		//BEN_CORRECTION : Configure distance to what ?
+		//				   ConfigureSafeDistance ?
+		//
+		//				   Mieux encore, pourquoi ne pas transformer cette méthode en propriété "Read Only" ?
+		//				   Voir plus bas.
 		private void ConfigureDistance()
 		{
 			if (health.HealthPoints <= MAX_VIE_CALCUL_DISTANCE && health.HealthPoints >= MIN_VIE_CALCUL_DISTANCE)
@@ -100,5 +116,17 @@ namespace Playmode.Ennemy.Strategies
 				previousHealth = health.HealthPoints;
 			}
 		}
+
+		/*
+		public float SafeDistance
+		{
+			get
+			{
+				float safeDistance;
+				//Votre calcul ici
+				return safeDistance;
+			}
+		};
+		*/
 	}
 }

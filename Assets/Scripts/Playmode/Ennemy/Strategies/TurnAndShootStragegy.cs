@@ -3,6 +3,8 @@ using Playmode.Movement;
 
 namespace Playmode.Ennemy.Strategies
 {
+    //BEN_CORRECTION : Code mort. Devrait être supprimé.
+    
     public class TurnAndShootStragegy : IEnnemyStrategy
     {
         private readonly Mover mover;

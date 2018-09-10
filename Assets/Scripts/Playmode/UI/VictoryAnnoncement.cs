@@ -23,6 +23,7 @@ namespace Playmode.UI
             eventHandlerVictory.OnEventPublished -= EventHandlerVictory_OnEventPublished;
         }
 
+        //BEN_REVIEW : Je déteste ces noms d'événements à la "Visual Studio". C'est long pour rien....
         private void EventHandlerVictory_OnEventPublished(VictoryData data)
         {
             if (data.WinnerName != null)

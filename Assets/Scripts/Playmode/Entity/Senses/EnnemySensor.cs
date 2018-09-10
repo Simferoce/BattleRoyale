@@ -33,6 +33,8 @@ namespace Playmode.Entity.Senses
             NotifyEnnemySeen(ennemy);
         }
 
+        //BEN_CORRECTION : Nommage. Pas que ce genre de nom me dérange, mais vous n'avez pas utiilsé cette formulation
+        //                 partout.
         private void Ennemy_OnDeathEnemy(EnnemyController ennemyController)
         {
             ennemiesInSight.Remove(ennemyController);

@@ -42,6 +42,8 @@ namespace Playmode.Ennemy
         private bool invincible = false;
         private string lastEnemyThatHitName = null;
 
+        //BEN_CORRECTION : Nommage pas standard C#. Doit débuter par une majuscule.
+        //                 Aussi, semble inutilisé.
         public bool isEarlySearching { get; private set; }
 
         private void Awake()
@@ -105,6 +107,8 @@ namespace Playmode.Ennemy
 
         private void Update()
         {
+            //BEN_REVIEW : J'aurais mis ça dans un bloc #if UNITY_EDITOR pour éviter que cela se ramasse dans la release
+            //             finale du jeu.
             if(strategy == null)
             {
                 Configure(EnnemyStrategy.Normal, Color.black, "Test");
@@ -124,7 +128,7 @@ namespace Playmode.Ennemy
             body.GetComponent<SpriteRenderer>().color = color;
             sight.GetComponent<SpriteRenderer>().color = color;
             gameObject.transform.root.name = name;
-            isEarlySearching = false;
+            isEarlySearching = false; //BEN_CORRECTION : Inutilisé au final...
             
             switch (strategy)
             {
@@ -153,6 +157,11 @@ namespace Playmode.Ennemy
 
         private void OnHit(int hitPoints, string enemyThatHitName)
         {
+            //BEN_CORRECTION : Il aurait été préférable de gérer l'invincibilité dans le composant "Health". Ce dernier
+            //                 s'occupe déjà de tout ce qui concerne les points de vie après tout.
+            //
+            //                 Voila un peu pourquoi je dis à chaque fois de lire le code de base afin de savoir ce qui
+            //                 existe déjà.
             if (invincible == false)
             {
                 lastEnemyThatHitName = enemyThatHitName;
@@ -160,6 +169,11 @@ namespace Playmode.Ennemy
             }
         }
 
+        //BEN_CORRECTION : En lien avec le commentaire du haut, il aurait aussi été préférable de publier sur le
+        //                 EnemyDeathChannel à partir du composant Health.
+        //
+        //                 Maintenant que j'y pense, j'aurais vraiment pas du appeler cette classe "EnnemyController"...
+        //                 vous avez tendance à vouloir tout faire la dedans.
         private void OnHealthChange(int newHealth)
         {
             if(newHealth <= 0)
@@ -169,7 +183,7 @@ namespace Playmode.Ennemy
                     enemyDeathChannel.Publish(new EnemyDeathData(gameObject.transform.root.name, lastEnemyThatHitName));
                 }
                 NotifyOnEnemyDeath();
-                Destroy(this.transform.parent.gameObject);
+                Destroy(this.transform.parent.gameObject); //BEN_CORRECTION : Bogue potentiel. Utilisez "transform.root".
             }
         }
 
@@ -199,6 +213,7 @@ namespace Playmode.Ennemy
             invincible = false;
         }
 
+        //BEN_CORRECTION : Nom indique pas ce que cela fait vraiment.
         public IEnnemyStrategy GetStrategyType()
         {
             return strategy;

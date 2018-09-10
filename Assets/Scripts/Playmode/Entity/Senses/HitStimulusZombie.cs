@@ -23,6 +23,7 @@ namespace Playmode.Entity.Senses
         private void OnTriggerEnter2D(Collider2D other)
         {
             HitSensor hitSensor = other.GetComponent<Entity.Senses.HitSensor>();
+            //BEN_CORRECTION : Patch. Logique à revoir.
             if(hitSensor != null && !(hitSensor.transform.parent.GetComponentInChildren<EnnemyController>().GetStrategyType() is ZombieStrategy))
             {
                 hitSensor.Hit(hitPoints, ShooterName);

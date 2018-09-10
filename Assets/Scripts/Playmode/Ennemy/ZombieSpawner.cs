@@ -7,6 +7,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+//BEN_CORRECTION : Pas de namespace ?
+
 public class ZombieSpawner : MonoBehaviour {
 
     [SerializeField] private GameObject zombiePrefab;
@@ -34,11 +36,11 @@ public class ZombieSpawner : MonoBehaviour {
         GameObject zombie = Instantiate(zombiePrefab, position, Quaternion.identity);
         EnnemyController controller = zombie.GetComponentInChildren<EnnemyController>();
         GameObject control = controller.gameObject;
-        control.GetComponent<Mover>().Speed = 2;
+        control.GetComponent<Mover>().Speed = 2; //BEN_CORRECTION : Valeur magique. Constante.
         GameObject body = controller.transform.parent.GetComponentInChildren<HitSensor>().gameObject;
-        HitStimulusZombie hitStimulus = body.AddComponent<HitStimulusZombie>();
+        HitStimulusZombie hitStimulus = body.AddComponent<HitStimulusZombie>(); //BEN_CORRECTION : Pourquoi créer ce composant là ? Pourquoi pas avoir vraiment fait un prefab de Zombie ?
         controller.Configure(EnnemyStrategy.Zombie, Color.black, "Zombie");
-        hitStimulus.ShooterName = "Zombie";
+        hitStimulus.ShooterName = "Zombie"; //BEN_CORRECTION : Valeur magique. Constante.
     }
 
     private IEnumerator SpawnZombies()

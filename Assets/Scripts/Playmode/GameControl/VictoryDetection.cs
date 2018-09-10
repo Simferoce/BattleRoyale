@@ -15,7 +15,7 @@ namespace Playmode.GameControl
         private void Awake()
         {
             eventHandlerEnemyDeath = GameObject.FindWithTag(Tags.GameController).GetComponent<EventHandlerEnemyDeath>();
-            eventHandlerEnemyDeath.OnEventPublished += EventHandlerEnemyDeath_OnEventPublished;
+            eventHandlerEnemyDeath.OnEventPublished += EventHandlerEnemyDeath_OnEventPublished; //BEN_CORRECTION : Devrait se faire dans "OnEnable". Voir votre méthode "OnDisable".
             eventHandlerVictory = GameObject.FindWithTag(Tags.GameController).GetComponent<EventHandlerVictory>();
         }
 
@@ -31,6 +31,7 @@ namespace Playmode.GameControl
             if (numbOfEnemies <= 1 && gameIsFinish == false)
             {
                 gameIsFinish = true;
+                //BEN_CORRECTION : Cette boucle est complètement inutile. Lisez bien comme il faut.
                 string winnerName = null;
                 for (int i = 0; i < enemyObjects.Length; ++i)
                 {

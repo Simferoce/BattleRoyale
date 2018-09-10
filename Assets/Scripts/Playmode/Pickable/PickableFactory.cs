@@ -17,6 +17,7 @@ namespace Playmode.Pickable
                 spawners = new GameObject[numbOfSpawners];
                 for(int i = 0; i < spawners.Length; ++i)
                 {
+                    //BEN_REVIEW : Et si je déplace la caméra, est-ce que votre script marche toujours ?
                     spawners[i] = Instantiate(spawner,
                         new Vector3(
                             Random.Range(-CameraInfo.Width/2, CameraInfo.Width/2), 

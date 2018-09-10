@@ -5,6 +5,7 @@ namespace Playmode.Movement
 {
     public class Mover : MonoBehaviour
     {
+        //BEN_CORRECTION : Problèmes de propreté du code ici. Essayer de regrouper ce qui va ensemble.
         private Transform rootTransform;
 
         public static readonly Vector2 Foward = Vector2.up;
@@ -48,6 +49,7 @@ namespace Playmode.Movement
 
         public void MoveToward(Vector2 destination)
         {
+            //BEN_CORRECTION : Indentation.
             SetRotationToLookAt(destination);
 
            Move(new Vector2(0, speed * Time.deltaTime));
@@ -55,6 +57,8 @@ namespace Playmode.Movement
 
         public void Follow(Vector2 target, float distance)
         {
+            //BEN_CORRECTION : Indentation.
+
             float distanceWithTarget = Vector2.Distance(target, rootTransform.transform.position);
             if(distanceWithTarget >= distance)
             {
@@ -65,6 +69,7 @@ namespace Playmode.Movement
             }
         }
 
+        //BEN_CORRECTION : Pourquoi pas juste "LookAt" ? C'est pas plus clair ainsi ?
         public void SetRotationToLookAt(Vector2 position)
         {
             Vector2 dir = position - (Vector2)rootTransform.position;

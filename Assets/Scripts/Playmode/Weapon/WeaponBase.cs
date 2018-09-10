@@ -2,11 +2,12 @@
 
 namespace Playmode.Weapon
 {
+    //BEN_CORRECTION : Cette classe ne sert à rien. Elle ne fait rien de plus.
     public class WeaponBase: WeaponController
     {
-        public override void Shoot(EnnemyController ennemyController)
+        public override void UpdatePower()
         {
-            base.Shoot(ennemyController);
+            //Noting to do
         }
     }
 }
